@@ -1,0 +1,55 @@
+$breakpoints: (
+  'xs': 375px,
+  'sm': 576px,
+  'md': 768px,
+  'lg': 1024px,
+  'xl': 1280px,
+  'xxl': 1440px,
+  'xxxl': 1880px,
+) !default;
+
+@mixin min($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $value: map-get($breakpoints, $breakpoint);
+    @media (min-width: $value) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint '#{$breakpoint}' not found in $breakpoints map.";
+  }
+}
+
+@mixin max($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $value: map-get($breakpoints, $breakpoint) - 0.02px;
+    @media (max-width: $value) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint '#{$breakpoint}' not found in $breakpoints map.";
+  }
+}
+
+@mixin between($min, $max) {
+  @if map-has-key($breakpoints, $min) and map-has-key($breakpoints, $max) {
+    $min-value: map-get($breakpoints, $min);
+    $max-value: map-get($breakpoints, $max) - 0.02px;
+    @media (min-width: $min-value) and (max-width: $max-value) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint '#{$min}' or '#{$max}' not found in $breakpoints map.";
+  }
+}
+
+// @mixin portrait {
+//   @media (orientation: portrait) {
+//     @content;
+//   }
+// }
+
+// @mixin landscape {
+//   @media (orientation: landscape) {
+//     @content;
+//   }
+// }

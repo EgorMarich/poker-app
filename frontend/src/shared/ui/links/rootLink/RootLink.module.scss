@@ -1,0 +1,17 @@
+@use '$/shared/styles/variables/colors';
+
+.link {
+  background-color: colors.$white;
+  border-radius: 12px;
+  color: colors.$black;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  &:hover {
+    color: colors.$black;
+    background-color: colors.$gray-100;
+  }
+}

@@ -1,0 +1,66 @@
+@use '$/shared/styles/variables/colors';
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  background: #1a1a1a;
+  border-radius: 16px;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.image {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.icon {
+  width: 52px;
+  height: 52px;
+  color: var(--color-gray-500);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.plan {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  padding: 1px 6px;
+  border-radius: 6px;
+  width: fit-content;
+  background-color: #121212;
+}
+
+.planFree {
+  color: colors.$gray-100;
+}
+.planBasic {
+  color: colors.$blue-100;
+}
+.planPro {
+  color: colors.$red-100;
+}
+.planUnlimited {
+  color: colors.$white;
+}
+
+.subscriptionBlock {
+  padding-top: 12px;
+  border-top: 1px solid var(--color-gray-700);
+}
+
+.subText {
+  margin: 0;
+}

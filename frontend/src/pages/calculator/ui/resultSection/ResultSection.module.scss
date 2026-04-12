@@ -1,0 +1,39 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  padding: 20px;
+  background-color: #0f0f0f;
+  border-radius: 12px;
+}
+
+.equityValue {
+  font-size: 24px;
+  font-weight: 600;
+  color: white;
+}
+
+.bar {
+  position: relative; 
+  height: 4px;
+  background-color: rgb(95, 95, 95);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressBar {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: red;
+  border-radius: 4px;
+  transition: width 0.3s ease; 
+}

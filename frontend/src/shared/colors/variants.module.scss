@@ -1,0 +1,39 @@
+@use '$/shared/styles/variables/colors';
+
+.color {
+  &_black {
+    color: colors.$black;
+  }
+
+  &_white {
+    color: colors.$white;
+  }
+
+  &_gray-400 {
+    color: colors.$gray-400;
+  }
+
+  &_gray-500 {
+    color: colors.$gray-500;
+  }
+
+  &_gray-600 {
+    color: colors.$gray-600;
+  }
+
+  &_gray-700 {
+    color: colors.$gray-700;
+  }
+
+  &_gray-800 {
+    color: colors.$gray-800;
+  }
+
+  &_vkontakte {
+    color: colors.$vkontakte;
+  }
+
+  &_blue-700 {
+    color: colors.$blue-700;
+  }
+}

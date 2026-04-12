@@ -1,0 +1,104 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.userCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background: var(--color-gray-800);
+  border-radius: 16px;
+  background-color: #1a1a1a;
+}
+
+.userHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.userName {
+  margin: 0;
+}
+
+.roleBadge {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: var(--color-gray-700);
+  color: var(--color-gray-300);
+}
+
+.roleAdmin {
+  background: var(--color-purple-900);
+  color: var(--color-purple-300);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.select {
+  background: var(--color-gray-700);
+  border: 1px solid var(--color-gray-600);
+  border-radius: 8px;
+  color: var(--color-white);
+  padding: 4px 8px;
+  font-size: var(--font-size-sm);
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+}
+
+.btnDanger {
+  background: var(--color-red-900);
+  color: var(--color-red-300);
+}
+.btnSuccess {
+  background: var(--color-green-900);
+  color: var(--color-green-300);
+}
+.btnSecondary {
+  background: var(--color-gray-700);
+  color: var(--color-gray-300);
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 8px;
+}
+
+.pageBtn {
+  background: var(--color-gray-700);
+  border: none;
+  border-radius: 8px;
+  color: var(--color-white);
+  padding: 6px 12px;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}

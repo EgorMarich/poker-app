@@ -1,0 +1,20 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.label {
+  color: var(--color-gray-400);
+}
+
+.response {
+  background: var(--color-gray-800);
+  border: 1px solid var(--color-gray-700);
+  border-radius: 12px;
+  padding: 16px;
+  line-height: var(--line-height-relaxed);
+  white-space: pre-wrap;
+  min-height: 80px;
+}

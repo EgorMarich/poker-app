@@ -1,0 +1,27 @@
+@use '$/shared/styles/variables/colors';
+
+.button {
+  background-color: colors.$white;
+  color: colors.$black;
+  min-height: 40px;
+  width: 100%;
+  border: none;
+  transition: 0.3s background-color;
+
+  &:active {
+    outline: none !important;
+    border: none;
+    background-color: #e0e0e0;
+  }
+
+  &:focus {
+    outline: none !important;
+    border: none !important;
+  }
+
+  &:hover {
+    outline: none !important;
+    border: none !important;
+    background-color: colors.$gray-200;
+  }
+}

@@ -1,0 +1,27 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background-color: transparent;
+  color: white;
+  min-height: 40px;
+  border: 2px solid white;
+
+  &:active {
+    outline: none !important;
+    border: 2px solid white;
+    background-color: #e0e0e0;
+    color: black;
+  }
+
+  &:focus {
+    outline: none !important;
+    border: 2px solid white;
+  }
+
+  &:hover {
+    outline: none !important;
+    border: 2px solid white;
+  }
+}

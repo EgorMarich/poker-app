@@ -1,0 +1,17 @@
+.root {
+  margin: 0 auto;
+  border-radius: 12px;
+  max-width: 90%;
+  background-color: #1a1a1a;
+  padding: 12px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

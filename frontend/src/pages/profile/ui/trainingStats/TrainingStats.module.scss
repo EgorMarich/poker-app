@@ -1,0 +1,49 @@
+@use '$/shared/styles/variables/colors';
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background: #1a1a1a;
+  border-radius: 16px;
+}
+
+.title {
+  margin: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  background: #101010;
+  border-radius: 12px;
+}
+
+.cardWarning {
+  background: var(--color-yellow-950);
+  border: 1px solid var(--color-yellow-800);
+}
+
+.value {
+  line-height: 1;
+}
+
+.label {
+  margin: 0;
+}
+
+.limitText {
+  margin: 0;
+  padding: 8px 12px;
+  background: var(--color-yellow-950);
+  border-radius: 8px;
+}

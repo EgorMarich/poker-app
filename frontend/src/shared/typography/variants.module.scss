@@ -1,0 +1,31 @@
+@use '$/shared/styles/mixins/typography';
+
+.typography {
+  &_headingLg {
+    @include typography.headingLg();
+  }
+
+  &_headingMd {
+    @include typography.headingMd();
+  }
+
+  &_bodyMd {
+    @include typography.bodyMd();
+  }
+
+  &_bodySm {
+    @include typography.bodySm();
+  }
+
+  &_bodyMdSemiBold {
+    @include typography.bodyMdSemiBold();
+  }
+
+  &_bodySmSemiBold {
+    @include typography.bodySmSemiBold();
+  }
+
+  &_caption {
+    @include typography.caption();
+  }
+}

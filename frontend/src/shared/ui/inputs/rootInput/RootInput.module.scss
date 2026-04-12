@@ -1,0 +1,20 @@
+@use '$/shared/styles/variables/colors';
+
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.input {
+  min-height: 40px;
+  border-radius: 12px;
+  background-color: #0f0f0f;
+  border: 2px solid #4c4a4a;
+  padding-left: 15px;
+  color: colors.$gray-500;
+
+  &:focus {
+    outline: none;
+  }
+}

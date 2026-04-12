@@ -1,0 +1,61 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 80px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  // background: var(--color-gray-800);
+  border-radius: 16px;
+  background-color: #1a1a1a;
+}
+
+.sectionTitle {
+  margin: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.statCard {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  background-color: #0e0e0e;
+  border-radius: 12px;
+}
+
+.revenueCard {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  background-color: #0e0e0e;
+  border-radius: 12px;
+}
+
+.plans,
+.signups {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.planRow,
+.signupRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background-color: #0e0e0e;
+  border-radius: 8px;
+}
