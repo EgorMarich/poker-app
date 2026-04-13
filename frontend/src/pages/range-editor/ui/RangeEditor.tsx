@@ -2,8 +2,11 @@ import clsx from 'clsx';
 import s from './RangeEditor.module.scss';
 import { typography } from '$/shared/typography/typography';
 import { RangeEditorForm } from './form/RangeEditorForm';
+import { useParams } from 'react-router';
 
 export const RangeEditor = () => {
+  const { id } = useParams<{ id: string }>();
+
   return (
     <div className={s.root}>
       <div className={s.headingWrapper}>
@@ -15,7 +18,7 @@ export const RangeEditor = () => {
         </p>
       </div>
       <div className={s.content}>
-        <RangeEditorForm />
+        <RangeEditorForm id={id} />
       </div>
     </div>
   );

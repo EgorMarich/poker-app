@@ -5,6 +5,7 @@ import { typography } from '$/shared/typography/typography';
 import EditIcon from './assets/edit.svg?react';
 import TrashIcon from './assets/trash.svg?react';
 import { DeleteModal } from '../deleteModal/DeleteModal';
+import { useNavigate } from 'react-router';
 import { useModal } from '$/shared/modal/ModalContext';
 
 type Rank = 'A' | 'K' | 'Q' | 'J' | 'T' | '9' | '8' | '7' | '6' | '5' | '4' | '3' | '2';
@@ -30,6 +31,12 @@ interface CardProps {
 export const Card = ({ name, description, position, matrix, actionType, id }: CardProps) => {
   const { openModal } = useModal();
   const ranks: Rank[] = ['A', 'K', 'Q', 'J', 'T', '9', '8', '7', '6', '5', '4', '3', '2'];
+
+  const navigate = useNavigate();
+
+  const handleEditClick = () => {
+    navigate(`/range-editor/${id}`);
+  };
 
   const getHandNotation = (rowIndex: number, colIndex: number): string => {
     const rank1 = ranks[rowIndex];
@@ -123,7 +130,7 @@ export const Card = ({ name, description, position, matrix, actionType, id }: Ca
             </p>
           </div>
           <div className={s.infoActions}>
-            <EditIcon className={s.editIcon} />
+            <EditIcon className={s.editIcon} onClick={handleEditClick} />
             <TrashIcon className={s.trashIcon} onClick={handleDeleteClick} />
           </div>
         </div>

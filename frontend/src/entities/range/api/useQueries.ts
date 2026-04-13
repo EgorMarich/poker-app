@@ -18,14 +18,13 @@ export const useGetAllRanges = queryOptions({
   
 });
 
-export function useRange(id: string) {
+export function useRange(id: string | null) {
   return useQuery({
-    queryKey: queryKeys.ranges.one(id),
-    queryFn: () => rangesApi.getOne(id),
-    enabled: !!id,
+    queryKey: queryKeys.ranges.one(id || ''),
+    queryFn: () => rangesApi.getOne(id!),
+    enabled: !!id, // Запрос выполнится ТОЛЬКО если есть id
   });
 }
-
 export function useRangesQuota() {
   return useQuery({
     queryKey: queryKeys.ranges.quota,

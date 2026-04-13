@@ -31,6 +31,7 @@ function App() {
               <Route index element={<Home />} />
               <Route path="calculator" element={<Calculator />} />
               <Route path="range-editor" element={<RangeEditor />} />
+              <Route path="range-editor/:id" element={<RangeEditor />} />
               <Route path="gto-helper" element={<GtoHelper />} />
               <Route path="profile" element={<Profile />} />
               <Route path="training" element={<Training />} />

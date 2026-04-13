@@ -1,13 +1,14 @@
+@use '$/shared/styles/variables/colors';
+
 .Field {
   display: flex;
   flex-direction: column;
   align-items: start;
   gap: 0.25rem;
 
-  :hover {
-    border: none !important;
-    outline: none !important;
-  }
+  // :hover {
+  //   border: 2px solid #4c4a4a;
+  // }
 
   :active {
     border: none !important;
@@ -46,21 +47,26 @@
   border-radius: 12px;
   background-color: #0f0f0f;
   font-family: inherit;
-  font-size: 1rem;
+  font-size: 0.9rem;
   line-height: 1.5rem;
-  color: #232323;
+  color: colors.$gray-500;
   -webkit-user-select: none;
   user-select: none;
+  font-weight: 400;
   min-width: 100%;
 
   &:focus-visible {
-    outline: none;
+    outline: none !important;
     border: none !important;
   }
 
   &:active-visible {
-    outline: none;
+    outline: none !important;
     border: none !important;
+  }
+
+  &:hover {
+    border: 2px solid #4c4a4a;
   }
 }
 
