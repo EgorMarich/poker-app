@@ -3,6 +3,7 @@ import {
   ForbiddenException,
   ServiceUnavailableException,
   Logger,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -12,6 +13,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { QueryLog, QueryStatus } from './entities/query-log.entity';
 import { Subscription } from '../payments/entities/subscription.entity';
 import { AiAdviceDto } from './dto/ai.dto';
+import { extractErrorDetails } from '@/common/utils/error.utils';
 
 const POKER_SYSTEM_PROMPT = `Ты эксперт по покеру и GTO (Game Theory Optimal) консультант.
 Давай краткие и практичные советы на основе современной покерной теории.
@@ -71,12 +73,17 @@ export class AiService {
       this.tokenExpiresAt = now + (data.expires_at - 30000);
       return this.accessToken;
     } catch (error) {
-      this.logger.error(
-        'GigaChat OAuth error',
-        error.response?.data || error.message,
+      const errorDetails = extractErrorDetails(error);
+
+      this.logger.error('GigaChat OAuth error', {
+        message: errorDetails.message,
+        status: errorDetails.status,
+        data: errorDetails.data,
+      });
+
+      throw new UnauthorizedException(
+        `GigaChat auth failed: ${errorDetails.message}`,
       );
-      this.logger.error('GigaChat OAuth error', { message: error.message });
-      throw new ServiceUnavailableException('AI auth failed');
     }
   }
 
@@ -148,10 +155,11 @@ export class AiService {
         quotaRemaining: this.getQuotaRemaining(subscription),
       };
     } catch (error) {
+      const errorDetails = extractErrorDetails(error);
       this.logger.error('GigaChat OAuth error', {
-        status: error.response?.status,
-        data: error.response?.data,
-        message: error.message,
+        status: errorDetails.status,
+        data: errorDetails.data,
+        message: errorDetails.message,
       });
       throw new ServiceUnavailableException('AI auth failed');
     }

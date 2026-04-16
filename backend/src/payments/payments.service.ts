@@ -21,6 +21,7 @@ import {
   PaymentProvider,
   PaymentStatus,
 } from './entities/payments.entity';
+import { extractErrorDetails } from '@/common/utils/error.utils';
 
 const PLAN_PRICES = {
   [SubscriptionPlan.BASIC]: { amount: '499.00', currency: 'RUB', months: 1 },
@@ -59,7 +60,6 @@ export class PaymentsService {
     const isTestMode =
       this.configService.get<string>('PAYMENT_TEST_MODE') === 'true';
 
-    // Тестовый режим — сразу активируем подписку без ЮКассы
     if (isTestMode) {
       const payment = this.paymentRepository.create({
         userId,
@@ -122,7 +122,6 @@ export class PaymentsService {
 
       const ykPayment = response.data;
 
-      // Save payment record
       const payment = this.paymentRepository.create({
         userId,
         provider: PaymentProvider.YOOKASSA,
@@ -145,9 +144,11 @@ export class PaymentsService {
         plan,
       };
     } catch (error) {
+      const errorDetails = extractErrorDetails(error);
       this.logger.error(
         'YooKassa payment creation failed',
-        error.response?.data || error.message,
+
+        errorDetails.data || errorDetails.message,
       );
       throw new BadRequestException('Payment creation failed');
     }

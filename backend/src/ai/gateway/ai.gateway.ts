@@ -18,6 +18,7 @@ import OpenAI from 'openai';
 import { Subscription } from '@/payments/entities/subscription.entity';
 import { AiAdviceDto } from '../dto/ai.dto';
 import { QueryLog, QueryStatus } from '../entities/query-log.entity';
+import { extractErrorDetails } from '@/common/utils/error.utils';
 
 @WebSocketGateway({
   cors: { origin: '*' },
@@ -107,7 +108,8 @@ export class AiGateway implements OnGatewayConnection, OnGatewayDisconnect {
         messages: [
           {
             role: 'system',
-            content: 'You are an expert poker coach. Give concise, actionable GTO advice.',
+            content:
+              'You are an expert poker coach. Give concise, actionable GTO advice.',
           },
           { role: 'user', content: dto.prompt },
         ],
@@ -136,8 +138,10 @@ export class AiGateway implements OnGatewayConnection, OnGatewayDisconnect {
         quotaRemaining: subscription.dailyAiQuota - subscription.dailyAiUsed,
       });
     } catch (error) {
+      const errorDetails = extractErrorDetails(error);
       log.status = QueryStatus.ERROR;
-      log.errorMessage = error.message;
+
+      log.errorMessage = errorDetails.message;
       await this.queryLogRepository.save(log);
       client.emit('stream-error', { message: 'AI service error' });
     }
