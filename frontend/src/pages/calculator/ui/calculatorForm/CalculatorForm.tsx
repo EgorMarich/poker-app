@@ -13,6 +13,7 @@ import clsx from 'clsx';
 import { ResetButton } from '$/shared/ui/buttons/tertiaryButtons/ResetButton';
 import { useQuery } from '@tanstack/react-query';
 import { useGetAllRanges } from '$/entities/range/api/useQueries';
+import { useTranslation } from 'react-i18next';
 
 interface CalculatorFormData {
   playerHand: SelectedCards;
@@ -23,6 +24,8 @@ interface CalculatorFormData {
 }
 
 export const CalculatorForm = () => {
+  const { t } = useTranslation();
+
   const { control, handleSubmit, watch } = useForm<CalculatorFormData>({
     defaultValues: {
       playerHand: [],
@@ -31,7 +34,7 @@ export const CalculatorForm = () => {
     },
   });
 
-  const { data: ranges } = useQuery(useGetAllRanges)
+  const { data: ranges } = useQuery(useGetAllRanges);
 
   const [isShow, setIsShow] = useState<boolean>(false);
   const [equityResult, setEquityResult] = useState<number | null>(0.0);
@@ -69,7 +72,7 @@ export const CalculatorForm = () => {
             rules={{
               validate: value => {
                 if (value.length !== 2) {
-                  return 'Выберите ровно 2 карты для вашей руки';
+                  return t('errors.selectTwoCards');
                 }
                 return true;
               },
@@ -77,7 +80,7 @@ export const CalculatorForm = () => {
             render={({ field, fieldState }) => (
               <div className={s.fieldWrapper}>
                 <Hand
-                  label="Ваша рука"
+                  label={t('calculator.yourHand')}
                   maxCards={2}
                   value={field.value}
                   onChange={field.onChange}
@@ -96,7 +99,7 @@ export const CalculatorForm = () => {
             rules={{
               validate: value => {
                 if (value.length > 5) {
-                  return 'Максимум 5 карт на борде';
+                  return t('errors.maxFiveCards');
                 }
                 return true;
               },
@@ -104,7 +107,7 @@ export const CalculatorForm = () => {
             render={({ field, fieldState }) => (
               <div className={s.fieldWrapper}>
                 <Hand
-                  label="Карты на борде"
+                  label={t('calculator.board')}
                   maxCards={5}
                   value={field.value}
                   onChange={field.onChange}
@@ -126,7 +129,7 @@ export const CalculatorForm = () => {
         <div className={clsx(s.action, isShow && s.actionWithRange)}>
           {!isShow ? (
             <SecondaryButton type="button" onClick={() => setIsShow(true)} icon>
-              Диапозон
+              {t('common.range')}
             </SecondaryButton>
           ) : (
             <div className={s.selection}>
@@ -136,8 +139,8 @@ export const CalculatorForm = () => {
                 render={({ field, fieldState }) => (
                   <>
                     <RootSelect
-                      placeholder="Выберите диапазон"
-                      label="Действие"
+                      placeholder={t('calculator.selectRange')}
+                      label={t('calculator.action')}
                       items={
                         ranges?.map(range => ({ label: range.name, value: String(range.id) })) || []
                       }
@@ -150,7 +153,7 @@ export const CalculatorForm = () => {
             </div>
           )}
           <div className={s.submitButtons}>
-            <PrimaryButton type="submit">Рассчитать</PrimaryButton>
+            <PrimaryButton type="submit">{ t('common.calculate') }</PrimaryButton>
             <ResetButton
               type="button"
               onClick={() => {

@@ -6,8 +6,11 @@ import { typography } from '$/shared/typography/typography';
 import { useScenarios, useSubmitAttempt } from '$/entities/training/model/training.queries';
 import { ResultCard } from './resultCard/ResultCard';
 import { ScenarioCard } from './scenarioCard/ScenarioCard';
+import { useTranslation } from 'react-i18next';
 
 export const Training = () => {
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
   const { data: scenarios, isLoading } = useScenarios();
   const { mutate: submitAttempt, isPending } = useSubmitAttempt();
@@ -51,7 +54,9 @@ export const Training = () => {
   if (isLoading) {
     return (
       <div className={s.center}>
-        <p className={typography({ variant: 'bodySm', color: 'gray-500' })}>Загрузка...</p>
+        <p className={typography({ variant: 'bodySm', color: 'gray-500' })}>
+          {t('common.loading')}
+        </p>
       </div>
     );
   }
@@ -61,10 +66,10 @@ export const Training = () => {
       <div className={s.center}>
         <p className={clsx(s.emoji)}>🎉</p>
         <p className={clsx(typography({ variant: 'bodySmSemiBold', color: 'white' }))}>
-          Все задания пройдены!
+          {t('training.done')}
         </p>
         <p className={clsx(typography({ variant: 'caption', color: 'gray-500' }))}>
-          Возвращайся завтра или улучши подписку
+          { t('training.doneSubtitle')}
         </p>
       </div>
     );

@@ -3,6 +3,7 @@ import s from './TrainingStats.module.scss';
 import { typography } from '$/shared/typography/typography';
 import { PrimaryButton } from '$/shared/ui/buttons/primaryButtons/PrimaryButtons';
 import { useNavigate } from 'react-router';
+import { useTranslation } from 'react-i18next';
 
 interface TrainingStatsProps {
   stats?: {
@@ -16,6 +17,7 @@ interface TrainingStatsProps {
 }
 
 export const TrainingStats = ({ stats }: TrainingStatsProps) => {
+  const { t } = useTranslation()
   const navigate = useNavigate();
   if (!stats) return null;
 
@@ -24,7 +26,7 @@ export const TrainingStats = ({ stats }: TrainingStatsProps) => {
   return (
     <div className={s.root}>
       <h4 className={clsx(s.title, typography({ variant: 'bodySmSemiBold', color: 'white' }))}>
-        Обучение
+        { t('training.stats.title')}
       </h4>
 
       <div className={s.grid}>
@@ -33,7 +35,7 @@ export const TrainingStats = ({ stats }: TrainingStatsProps) => {
             {stats.total}
           </span>
           <span className={clsx(s.label, typography({ variant: 'caption', color: 'gray-500' }))}>
-            Всего попыток
+            { t('training.stats.total')}
           </span>
         </div>
 
@@ -42,7 +44,7 @@ export const TrainingStats = ({ stats }: TrainingStatsProps) => {
             {stats.accuracy}%
           </span>
           <span className={clsx(s.label, typography({ variant: 'caption', color: 'gray-500' }))}>
-            Точность
+            { t('training.stats.accuracy')}
           </span>
         </div>
 
@@ -51,7 +53,7 @@ export const TrainingStats = ({ stats }: TrainingStatsProps) => {
             {stats.correct}
           </span>
           <span className={clsx(s.label, typography({ variant: 'caption', color: 'gray-500' }))}>
-            Правильных
+            { t('training.stats.correct')}
           </span>
         </div>
 
@@ -60,16 +62,16 @@ export const TrainingStats = ({ stats }: TrainingStatsProps) => {
             {isUnlimited ? '∞' : `${stats.todayAttempts}/${stats.dailyLimit}`}
           </span>
           <span className={clsx(s.label, typography({ variant: 'caption', color: 'gray-500' }))}>
-            Сегодня
+            { t('training.stats.today')}
           </span>
         </div>
       </div>
 
-      <PrimaryButton onClick={() => navigate('/training')}>Перейти к тренажёру</PrimaryButton>
+      <PrimaryButton onClick={() => navigate('/training')}>{ t('training.start')}</PrimaryButton>
 
       {!stats.canAttempt && (
         <p className={clsx(s.limitText, typography({ variant: 'caption' }))}>
-          Дневной лимит исчерпан. Обновится завтра.
+          { t('training.stats.limitExceeded')}
         </p>
       )}
     </div>

@@ -6,9 +6,11 @@ import { useCreatePayment, useSubscription } from '$/entities/payments/model/pay
 import { useQueryClient } from '@tanstack/react-query'
 import { queryKeys } from '$/shared/api/query-keys'
 import s from './Tariff.module.scss'
+import { useTranslation } from 'react-i18next'
 
 export const Tariff = () => {
   const navigate = useNavigate()
+  const { t } = useTranslation();
   const qc = useQueryClient()
   const { data: subscription } = useSubscription()
   const { mutate: createPayment, isPending } = useCreatePayment()
@@ -23,7 +25,7 @@ export const Tariff = () => {
         setLoadingPlan(null)
 
         if (res.testMode) {
-          // Тестовый режим — показываем успех и обновляем данные
+          
           setSuccessPlan(plan)
           qc.invalidateQueries({ queryKey: queryKeys.payments.subscription })
           qc.invalidateQueries({ queryKey: queryKeys.profile })
@@ -46,7 +48,7 @@ export const Tariff = () => {
 
       {successPlan && (
         <div className={s.successBanner}>
-          ✅ Подписка активирована! Перенаправляем...
+          ✅ { t('subscription.successBanner') }
         </div>
       )}
 

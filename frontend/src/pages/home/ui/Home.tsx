@@ -7,12 +7,14 @@ import { useQuery } from '@tanstack/react-query';
 import { useGetAllRanges } from '$/entities/range/api/useQueries';
 import { Card } from './card/Card';
 import { AddButton } from '$/shared/ui/buttons/addButton/addButton';
+import { useTranslation } from 'react-i18next'
 
 export const Home = () => {
+  const { t } = useTranslation();
   const { data, isError, isLoading } = useQuery(useGetAllRanges);
 
-  if (isError) return <div>Ну тут ошибочка у вас</div>;
-  if (isLoading) return <div>Загрузка вообще-то...</div>;
+  if (isError) return <div>{ t('common.error') }</div>;
+  if (isLoading) return <div>{t('common.loading')}</div>;
 
   return (
     <div className={s.root}>
@@ -36,12 +38,12 @@ export const Home = () => {
           <div className={s.text}>
             <BookIcon />
             <h5 className={typography({ variant: 'bodySmSemiBold' })}>
-              На данный момент у вас нет диапозонов
+              { t('home.noRanges') }
             </h5>
-            <p className={color({ color: 'gray-500' })}>Создайте ваш первый диапозон</p>
+            <p className={color({ color: 'gray-500' })}>{ t('home.createFirst') }</p>
           </div>
           <RootLink icon href="/range-editor">
-            Создать
+            { t('home.create') }
           </RootLink>
         </div>
       )}

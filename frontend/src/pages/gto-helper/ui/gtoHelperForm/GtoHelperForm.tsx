@@ -11,6 +11,7 @@ import { PositionSection } from '$/pages/range-editor/ui/form/positionSection/Po
 import RootInput from '$/shared/ui/inputs/rootInput/RootInput';
 import Textarea from '$/shared/ui/textarea/Textarea';
 import { GtoFormData } from '$/shared/hooks/useGtoHelper';
+import { useTranslation } from 'react-i18next';
 
 interface CalculatorFormData {
   playerHand: SelectedCards;
@@ -29,6 +30,7 @@ interface GtoHelperFormProps {
 }
 
 export const GtoHelperForm = ({ onSubmit, isPending, rangeItems }: GtoHelperFormProps) => {
+  const { t } = useTranslation();
   const { control, handleSubmit, watch, reset } = useForm<CalculatorFormData>({
     defaultValues: { playerHand: [], boardCards: [] },
   });
@@ -45,11 +47,11 @@ export const GtoHelperForm = ({ onSubmit, isPending, rangeItems }: GtoHelperForm
         <Controller
           name="playerHand"
           control={control}
-          rules={{ validate: v => v.length === 2 || 'Выберите ровно 2 карты' }}
+          rules={{ validate: v => v.length === 2 || t('selectTwoCards') }}
           render={({ field, fieldState }) => (
             <div className={s.fieldWrapper}>
               <Hand
-                label="Ваша рука"
+                label={t('calculator.yourHand')}
                 maxCards={2}
                 value={field.value}
                 onChange={field.onChange}
@@ -65,11 +67,11 @@ export const GtoHelperForm = ({ onSubmit, isPending, rangeItems }: GtoHelperForm
         <Controller
           name="boardCards"
           control={control}
-          rules={{ validate: v => v.length <= 5 || 'Максимум 5 карт' }}
+          rules={{ validate: v => v.length <= 5 || t('errors.maxFiveCards') }}
           render={({ field, fieldState }) => (
             <div className={s.fieldWrapper}>
               <Hand
-                label="Карты на борде"
+                label={ t('calculator.board')}
                 maxCards={5}
                 value={field.value}
                 onChange={field.onChange}
@@ -105,7 +107,7 @@ export const GtoHelperForm = ({ onSubmit, isPending, rangeItems }: GtoHelperForm
             control={control}
             render={({ field, fieldState }) => (
               <>
-                <RootInput placeholder="Сумма банка" label="Банк(BB)" {...field} />
+                <RootInput placeholder={t('gto.bankPlaceholder')} label={t('gto.bank')} {...field} />
                 {fieldState.error && <span>{fieldState.error.message}</span>}
               </>
             )}
@@ -115,7 +117,7 @@ export const GtoHelperForm = ({ onSubmit, isPending, rangeItems }: GtoHelperForm
             control={control}
             render={({ field, fieldState }) => (
               <>
-                <RootInput placeholder="Сумма ставки" label="Ставка(BB)" {...field} />
+                <RootInput placeholder={t('gto.bidPlaceholder')} label={t('gto.bid')} {...field} />
                 {fieldState.error && <span>{fieldState.error.message}</span>}
               </>
             )}
@@ -128,8 +130,8 @@ export const GtoHelperForm = ({ onSubmit, isPending, rangeItems }: GtoHelperForm
           render={({ field, fieldState }) => (
             <>
               <Textarea
-                placeholder="Укажите информацию(по желанию)"
-                label="Дополнительная информация"
+                placeholder={ t( 'gto.additionalInfoPlaceholder') }
+                label={t('gto.additionalInfo')}
                 {...field}
               />
               {fieldState.error && <span>{fieldState.error.message}</span>}
@@ -141,7 +143,7 @@ export const GtoHelperForm = ({ onSubmit, isPending, rangeItems }: GtoHelperForm
       <div className={clsx(s.action, isShow && s.actionWithRange)}>
         {!isShow ? (
           <SecondaryButton type="button" onClick={() => setIsShow(true)} icon>
-            Диапазон
+            { t('gto.rangeLabel')}
           </SecondaryButton>
         ) : (
           <div className={s.selection}>
@@ -151,8 +153,8 @@ export const GtoHelperForm = ({ onSubmit, isPending, rangeItems }: GtoHelperForm
               render={({ field, fieldState }) => (
                 <>
                   <RootSelect
-                    placeholder="Выберите диапазон"
-                    label="Диапазон"
+                    placeholder={ t('gto.selectRange') }
+                    label={t('gto.range')}
                     items={rangeItems ?? []}
                     {...field}
                   />
@@ -164,7 +166,7 @@ export const GtoHelperForm = ({ onSubmit, isPending, rangeItems }: GtoHelperForm
         )}
         <div className={s.submitButtons}>
           <PrimaryButton type="submit" disabled={isPending}>
-            {isPending ? 'Анализирую...' : 'Рассчитать'}
+            {isPending ? t('gto.analyzing') : t('common.calculate')}
           </PrimaryButton>
           <ResetButton
             type="button"

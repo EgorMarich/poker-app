@@ -10,6 +10,7 @@ import { ColorSection } from '$/features/colorsSection/ColorSection'
 import { useCreateRange, useUpdateRange } from '$/entities/range/api/useMutation'
 
 import { useRange } from '$/entities/range/api/useQueries'
+import { useTranslation } from 'react-i18next'
 
 const POSITIONS = ['UTG', 'UTG+1', 'UTG+2', 'MP', 'HJ', 'CO', 'BTN', 'SB', 'BB'] as const
 // type Position = typeof POSITIONS[number]
@@ -29,6 +30,9 @@ interface RangeEditorFormProps {
 }
 
 export const RangeEditorForm = ({ id }: RangeEditorFormProps) => {
+
+  const { t } = useTranslation();
+
   const isEditMode = !!id
   const { data: rangeData } = useRange(isEditMode ? id : '')
 
@@ -90,10 +94,10 @@ export const RangeEditorForm = ({ id }: RangeEditorFormProps) => {
       <Controller
         name="name"
         control={control}
-        rules={{ required: 'Введите название' }}
+        rules={{ required: t('ranges.nameRequired') }}
         render={({ field, fieldState }) => (
           <>
-            <RootInput placeholder="Мой диапазон" label="Название" {...field} />
+            <RootInput placeholder={ t('ranges.namePlaceholder') } label={t('ranges.name')} {...field} />
             {fieldState.error && <span>{fieldState.error.message}</span>}
           </>
         )}
@@ -104,7 +108,7 @@ export const RangeEditorForm = ({ id }: RangeEditorFormProps) => {
         control={control}
         render={({ field, fieldState }) => (
           <>
-            <RootInput placeholder="Опционально" label="Описание" {...field} />
+            <RootInput placeholder={t('ranges.optional')} label={t('ranges.description')} {...field} />
             {fieldState.error && <span>{fieldState.error.message}</span>}
           </>
         )}
@@ -116,8 +120,8 @@ export const RangeEditorForm = ({ id }: RangeEditorFormProps) => {
         render={({ field, fieldState }) => (
           <>
             <RootSelect
-              placeholder="Выберите действие"
-              label="Действие"
+              placeholder={t('ranges.actionPlaceholder')}
+              label={t('ranges.action')}
               items={actions}
               {...field}
             />
@@ -176,7 +180,7 @@ export const RangeEditorForm = ({ id }: RangeEditorFormProps) => {
       />
 
       <PrimaryButton type="submit">
-        {isEditMode ? 'Обновить' : 'Добавить'}
+        {isEditMode ? t('ranges.update') : t('ranges.add')}
       </PrimaryButton>
     </form>
   )

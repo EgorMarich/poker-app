@@ -3,6 +3,7 @@ import s from './account.module.scss'
 import ProfileIcon from './assets/pfile.svg?react'
 import clsx from 'clsx'
 import type { Subscription } from '$/shared/api/schemas'
+import { useTranslation } from 'react-i18next'
 
 interface AccountProps {
   avatar?: string
@@ -25,6 +26,8 @@ const PLAN_COLORS = {
 }
 
 export const Account = ({ avatar, name, subscription }: AccountProps) => {
+  const { t } = useTranslation();
+  
   const plan = subscription?.plan ?? 'free'
   const expiresAt = subscription?.expiresAt
     ? new Date(subscription.expiresAt).toLocaleDateString('ru-RU')
@@ -51,11 +54,11 @@ export const Account = ({ avatar, name, subscription }: AccountProps) => {
       <div className={s.subscriptionBlock}>
         {plan === 'free' ? (
           <p className={clsx(s.subText, typography({ variant: 'caption', color: 'gray-500' }))}>
-            Нет активной подписки
+            { t('porfile.noSubscription') }
           </p>
         ) : (
           <p className={clsx(s.subText, typography({ variant: 'caption', color: 'gray-500' }))}>
-            Активна{expiresAt ? ` до ${expiresAt}` : ''}
+            { t('profile.subscriptionActive') } {expiresAt ? ` до ${expiresAt}` : ''}
           </p>
         )}
       </div>

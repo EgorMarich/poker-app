@@ -1,0 +1,26 @@
+.root {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  background: var(--color-gray-800);
+  border-radius: 12px;
+}
+
+.btn {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  color: var(--color-gray-400);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all 0.15s;
+
+  &:hover { color: var(--color-white); }
+}
+
+.active {
+  background: var(--color-gray-700);
+  color: var(--color-white);
+}

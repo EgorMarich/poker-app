@@ -2,6 +2,7 @@ import { typography } from '$/shared/typography/typography'
 import { PrimaryButton } from '$/shared/ui/buttons/primaryButtons/PrimaryButtons'
 import { clsx } from 'clsx'
 import s from './Card.module.scss'
+import { useTranslation } from 'react-i18next'
 
 interface CardProps {
   id: number
@@ -22,11 +23,13 @@ export const Card = ({
   title, price, description, features, caption,
   isActive, isLoading, isSuccess, disabled, onSelect,
 }: CardProps) => {
+
+  const { t } = useTranslation();
   function getButtonLabel() {
-    if (isSuccess) return '✅ Активировано'
-    if (isLoading) return 'Оформляем...'
-    if (isActive) return 'Текущий план'
-    return 'Выбрать'
+    if (isSuccess) return t('subscription.activated');
+    if (isLoading) return t('subscription.activating');
+    if (isActive) return t('subscription.current');
+    return t('subscription.select');
   }
 
   return (
@@ -38,14 +41,14 @@ export const Card = ({
           </span>
         )}
         {isActive && (
-          <span className={s.activeBadge}>активен</span>
+          <span className={s.activeBadge}>{ t('tariff.status') }</span>
         )}
         <h1 className={typography({ variant: 'headingMd' })}>{title}</h1>
       </div>
 
       <div className={s.price}>
         <span className={typography({ variant: 'headingMd' })}>{price}</span>
-        /месяц
+        { t('subscription.perMonth') }
       </div>
 
       {description}

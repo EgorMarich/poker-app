@@ -1,17 +1,21 @@
 import { typography } from '$/shared/typography/typography';
+import { useTranslation } from 'react-i18next';
 import { CELLS } from './config/data';
 import { PosiotionSectionProps, type Cells } from './config/types';
 import s from './PositionSection.module.scss';
 import clsx from 'clsx';
 
+
+
 export const PositionSection = ({
   isActive,
   onChange,
-  label = 'Позиция',
 }: PosiotionSectionProps) => {
+
+  const { t } = useTranslation();
   return (
     <div className={s.root}>
-      <div className={typography({ variant: 'bodySmSemiBold' })}>{label}</div>
+      <div className={typography({ variant: 'bodySmSemiBold' })}>{t('ranges.position')}</div>
       <div className={s.cells}>
         {CELLS.map((item: Cells) => (
           <div

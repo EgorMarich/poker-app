@@ -7,6 +7,7 @@ import s from './Profile.module.scss';
 import { Subscribe } from './subscribe/Subscribe';
 import { PrimaryButton } from '$/shared/ui/buttons/primaryButtons/PrimaryButtons';
 import { useNavigate } from 'react-router';
+import { useTranslation } from 'react-i18next';
 
 export const Profile = () => {
   const { data: user } = useProfile();
@@ -14,11 +15,12 @@ export const Profile = () => {
   const { data: stats } = useTrainingStats();
 
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <div className={s.root}>
       <Account
         avatar={user?.telegramPhotoUrl ?? undefined}
-        name={user?.firstName ?? 'Пользователь'}
+        name={user?.firstName ?? t('profile.title')}
         subscription={subscription}
       />
       <TrainingStats stats={stats} />
