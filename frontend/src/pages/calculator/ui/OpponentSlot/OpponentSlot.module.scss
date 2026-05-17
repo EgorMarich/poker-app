@@ -1,0 +1,136 @@
+@use '$/shared/styles/variables/colors';
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background: colors.$gray-800;
+  border-radius: 12px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.label {
+  white-space: nowrap;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.select {
+  flex: 1;
+  max-width: 200px;
+  background: colors.$gray-900;
+  border: 1px solid var(--color-gray-600);
+  border-radius: 8px;
+  color: var(--color-white);
+  padding: 6px 8px;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+
+  option {
+    background: colors.$gray-900;
+    border-radius: 12px;
+  }
+
+  &:focus {
+    border: none;
+  }
+
+  &:active {
+    border: none;
+  }
+}
+
+.gridToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 35px;
+  border: 1px solid colors.$gray-600;
+  border-radius: 8px;
+  color: colors.$gray-400;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &:hover {
+    border: 1px solid colors.$white;
+    background-color: colors.$gray-900;
+  }
+
+  &:active {
+    border: 1px solid colors.$white;
+    color: var(--color-white);
+  }
+
+  &:focus {
+    outline: 1px solid colors.$gray-800 !important;
+  }
+
+  &:focus-visible {
+    border: 1px solid colors.$gray-800;
+  }
+}
+
+.gridToggleActive {
+  border: 1px solid colors.$white;
+  background-color: colors.$gray-800;
+}
+
+.clearBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  color: var(--color-gray-500);
+  font-size: 12px;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--color-red-400);
+  }
+}
+
+.gridWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.gridLabel {
+  margin: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(13, 1fr);
+  gap: 1px;
+  background: var(--color-gray-700);
+  border-radius: 6px;
+  overflow: hidden;
+  padding: 1px;
+}
+
+.cell {
+  aspect-ratio: 1;
+  background: var(--color-gray-900);
+  border-radius: 1px;
+  transition: background 0.1s;
+}

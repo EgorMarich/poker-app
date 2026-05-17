@@ -4,6 +4,7 @@ export enum ScenarioType {
   QUIZ = 'quiz',
   ACTION = 'action',
   RANGE = 'range',
+  MULTISTREET = 'multistreet'
 }
 
 export enum Difficulty {

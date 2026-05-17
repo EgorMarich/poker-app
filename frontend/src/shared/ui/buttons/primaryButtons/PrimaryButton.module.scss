@@ -1,7 +1,7 @@
 @use '$/shared/styles/variables/colors';
 
 .button {
-  background-color: colors.$white;
+  background-color: colors.$toxic-100;
   color: colors.$black;
   min-height: 40px;
   width: 100%;
@@ -11,7 +11,7 @@
   &:active {
     outline: none !important;
     border: none;
-    background-color: #e0e0e0;
+    background-color: colors.$toxic-200;
   }
 
   &:focus {
@@ -22,6 +22,6 @@
   &:hover {
     outline: none !important;
     border: none !important;
-    background-color: colors.$gray-200;
+    background-color: colors.$toxic-300;
   }
 }

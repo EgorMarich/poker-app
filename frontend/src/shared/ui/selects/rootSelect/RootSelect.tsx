@@ -10,13 +10,20 @@ interface item {
 }
 
 interface RootSelectProps {
-  label: string;
+  label?: string;
   items: item[];
+  value?: string;
   placeholder: string;
   onChange: (value: string) => void;
 }
 
-export default function RootSelect({ label, items, onChange, placeholder }: RootSelectProps) {
+export default function RootSelect({
+  label,
+  items,
+  onChange,
+  placeholder,
+  value,
+}: RootSelectProps) {
   const handleValueChange = (selectedValue: string | null) => {
     onChange?.(selectedValue || '');
   };
@@ -26,7 +33,7 @@ export default function RootSelect({ label, items, onChange, placeholder }: Root
       <Field.Label className={styles.Label} nativeLabel={false} render={<div />}>
         <p className={typography({ variant: 'bodySmSemiBold' })}>{label}</p>
       </Field.Label>
-      <Select.Root items={items} onValueChange={handleValueChange}>
+      <Select.Root items={items} onValueChange={handleValueChange} value={value || null}>
         <Select.Trigger className={styles.Select}>
           <Select.Value className={styles.Value} placeholder={placeholder} />
         </Select.Trigger>

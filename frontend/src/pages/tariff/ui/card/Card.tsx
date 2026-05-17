@@ -26,10 +26,10 @@ export const Card = ({
 
   const { t } = useTranslation();
   function getButtonLabel() {
-    if (isSuccess) return t('subscription.activated');
-    if (isLoading) return t('subscription.activating');
-    if (isActive) return t('subscription.current');
-    return t('subscription.select');
+    if (isSuccess) return t('tariff.activated');
+    if (isLoading) return t('tariff.activating');
+    if (isActive) return t('tariff.current');
+    return t('tariff.select');
   }
 
   return (
@@ -47,8 +47,8 @@ export const Card = ({
       </div>
 
       <div className={s.price}>
-        <span className={typography({ variant: 'headingMd' })}>{price}</span>
-        { t('subscription.perMonth') }
+        <span className={typography({ variant: 'headingLg' })}>{price}</span> 
+        { t('tariff.perMonth') }
       </div>
 
       {description}

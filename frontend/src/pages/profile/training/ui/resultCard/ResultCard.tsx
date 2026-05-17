@@ -25,7 +25,7 @@ export const ResultCard = ({ result, scenario, onNext, isLast }: Props) => {
       <div className={clsx(s.badge, result.isCorrect ? s.correct : s.wrong)}>
         <span className={s.emoji}>{result.isCorrect ? '✅' : '❌'}</span>
         <span className={clsx(typography({ variant: 'bodySmSemiBold', color: 'white' }))}>
-          {result.isCorrect ? t('trainig.correct') : t('training.wrong')}
+          {result.isCorrect ? t('training.correctAnswer') : t('training.wrong')}
         </span>
       </div>
 
@@ -47,7 +47,7 @@ export const ResultCard = ({ result, scenario, onNext, isLast }: Props) => {
             typography({ variant: 'caption', color: 'gray-500' })
           )}
         >
-          { t('trainig.explanation')}
+          {t('training.explanation')}
         </p>
         <p className={clsx(typography({ variant: 'bodySm', color: 'white' }))}>
           {result.explanation}

@@ -1,26 +1,21 @@
 import { Controller, useForm } from 'react-hook-form';
 import { Hand, SelectedCards } from '$/features/hand/Hand';
 import s from './CalculatorForm.module.scss';
-import RootSelect from '$/shared/ui/selects/rootSelect/RootSelect';
 import { useState } from 'react';
-import { OpponentsSlider } from '$/shared/ui/slider/Slider';
 import { calculateEquity } from '../../lib/calculateEquity';
 import { mapUICards } from '../../lib/adapters';
 import { PrimaryButton } from '$/shared/ui/buttons/primaryButtons/PrimaryButtons';
 import { ResultSection } from '../resultSection/ResultSection';
-import { SecondaryButton } from '$/shared/ui/buttons/secondaryButtons/SecondaryButtons';
-import clsx from 'clsx';
 import { ResetButton } from '$/shared/ui/buttons/tertiaryButtons/ResetButton';
 import { useQuery } from '@tanstack/react-query';
 import { useGetAllRanges } from '$/entities/range/api/useQueries';
 import { useTranslation } from 'react-i18next';
+import { OpponentsSection } from '../OpponentSection/OpponentSection';
 
 interface CalculatorFormData {
   playerHand: SelectedCards;
   boardCards: SelectedCards;
   players?: number;
-  position?: string;
-  range?: string;
 }
 
 export const CalculatorForm = () => {
@@ -34,33 +29,45 @@ export const CalculatorForm = () => {
     },
   });
 
-  const { data: ranges } = useQuery(useGetAllRanges);
+  const { data: ranges = [] } = useQuery(useGetAllRanges);
 
-  const [isShow, setIsShow] = useState<boolean>(false);
   const [equityResult, setEquityResult] = useState<number | null>(0.0);
+  const [opponentRanges, setOpponentRanges] = useState<(string | null)[]>([])
+
+  function handleRangeSelect(index: number, rangeId: string | null) {
+    setOpponentRanges(prev => {
+      const next = [...prev]
+      next[index] = rangeId
+      return next
+    })
+  }
+
+  function handleCountChange(count: number) {
+    setOpponentRanges(prev => prev.slice(0, count - 1))
+  }
 
   const playerHand = watch('playerHand');
   const boardCards = watch('boardCards');
 
   const onSubmit = (formData: CalculatorFormData) => {
-    const heroCards = mapUICards(formData.playerHand);
-    const mappedBoard = mapUICards(formData.boardCards);
+    const heroCards = mapUICards(formData.playerHand)
+    const mappedBoard = mapUICards(formData.boardCards)
 
-    const selectedRange = ranges?.find(r => String(r.id) === formData.range);
-
-    const opponents = Array(formData.players! - 1)
-      .fill({})
-      .map((_, i) => (i === 0 && selectedRange ? { range: selectedRange.matrix } : {}));
+    const opponents = Array.from({ length: formData.players && formData.players - 1 || 0 }, (_, i) => {
+      const rangeId = opponentRanges[i] ?? null
+      const selectedRange = ranges.find(r => r.id === Number(rangeId))
+      return selectedRange ? { range: selectedRange.matrix } : {}
+    })
 
     const equity = calculateEquity({
       heroHand: heroCards,
       board: mappedBoard,
       opponents,
       simulations: 10000,
-    });
+    })
 
-    setEquityResult(equity);
-  };
+    setEquityResult(equity)
+  }
 
   return (
     <div className={s.root}>
@@ -118,40 +125,29 @@ export const CalculatorForm = () => {
             )}
           />
         </div>
+
         <Controller
           name="players"
           control={control}
           render={({ field }) => (
-            <OpponentsSlider value={field.value ?? 1} onChange={field.onChange} />
+            <OpponentsSection
+              count={field.value || 0}
+              onCountChange={(count) => {
+                field.onChange(count)
+                handleCountChange(count)
+              }}
+              ranges={ranges.map(r => ({
+                id: String(r.id),
+                name: r.name,
+                matrix: r.matrix,
+              }))}
+              opponentRanges={opponentRanges}
+              onRangeSelect={handleRangeSelect}
+            />
           )}
         />
 
-        <div className={clsx(s.action, isShow && s.actionWithRange)}>
-          {!isShow ? (
-            <SecondaryButton type="button" onClick={() => setIsShow(true)} icon>
-              {t('common.range')}
-            </SecondaryButton>
-          ) : (
-            <div className={s.selection}>
-              <Controller
-                name="range"
-                control={control}
-                render={({ field, fieldState }) => (
-                  <>
-                    <RootSelect
-                      placeholder={t('calculator.selectRange')}
-                      label={t('calculator.action')}
-                      items={
-                        ranges?.map(range => ({ label: range.name, value: String(range.id) })) || []
-                      }
-                      {...field}
-                    />
-                    {fieldState.error && <span>{fieldState.error.message}</span>}
-                  </>
-                )}
-              />
-            </div>
-          )}
+        <div className={s.action}>
           <div className={s.submitButtons}>
             <PrimaryButton type="submit">{ t('common.calculate') }</PrimaryButton>
             <ResetButton

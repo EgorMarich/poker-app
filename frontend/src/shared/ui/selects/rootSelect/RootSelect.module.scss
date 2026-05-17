@@ -5,10 +5,7 @@
   flex-direction: column;
   align-items: start;
   gap: 0.25rem;
-
-  // :hover {
-  //   border: 2px solid #4c4a4a;
-  // }
+  width: 100%; // Добавляем, чтобы поле занимало всю ширину
 
   :active {
     border: none !important;
@@ -28,10 +25,6 @@
   cursor: default;
 }
 
-.Value[data-placeholder] {
-  opacity: 0.6;
-}
-
 .Select {
   box-sizing: border-box;
   display: flex;
@@ -43,7 +36,7 @@
   padding-right: 0.75rem;
   margin: 0;
   outline: 0;
-  border: 2px solid #4c4a4a;
+  border: 2px solid colors.$toxic-100;
   border-radius: 12px;
   background-color: #0f0f0f;
   font-family: inherit;
@@ -54,6 +47,7 @@
   user-select: none;
   font-weight: 400;
   min-width: 100%;
+  max-width: 100%; 
 
   &:focus-visible {
     outline: none !important;
@@ -66,10 +60,25 @@
   }
 
   &:hover {
-    border: 2px solid #4c4a4a;
+    border: 2px solid colors.$toxic-100;
   }
 }
 
+// Добавляем стили для Value
+.Value {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  min-width: 0; // Важно для корректной работы flex-ребёнка с text-overflow
+}
+
+// Стили для плейсхолдера
+.Value[data-placeholder] {
+  opacity: 0.6;
+}
+
+// Остальные стили остаются без изменений...
 .Positioner {
   outline: none;
   z-index: 1;
@@ -139,18 +148,6 @@
   fill: canvas;
 }
 
-// .ArrowOuterStroke {
-//   @media (prefers-color-scheme: light) {
-//     fill: var(--color-gray-200);
-//   }
-// }
-
-// .ArrowInnerStroke {
-//   @media (prefers-color-scheme: dark) {
-//     fill: var(--color-gray-300);
-//   }
-// }
-
 .Item {
   box-sizing: border-box;
   outline: 0;
@@ -206,6 +203,9 @@
 
 .ItemText {
   grid-column-start: 2;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .ScrollArrow {

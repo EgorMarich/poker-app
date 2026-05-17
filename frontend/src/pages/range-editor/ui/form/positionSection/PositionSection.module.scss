@@ -1,3 +1,6 @@
+@use '$/shared/styles/variables/colors';
+
+
 .root {
   display: flex;
   flex-direction: column;
@@ -19,7 +22,7 @@
   &.active {
     
     background-color: #0e2707;
-    color: #059669;
-    border: 2px solid #059669;
+    color: colors.$toxic-100;
+    border: 2px solid colors.$toxic-100;
   }
 }

@@ -1,5 +1,3 @@
-
-
 export const ru = {
   common: {
     loading: 'Загрузка...',
@@ -13,7 +11,7 @@ export const ru = {
     back: '←',
     reset: 'Сбросить',
     error: 'Ошибка',
-    range: 'Диапозон'
+    range: 'Диапозон',
   },
   nav: {
     home: 'Главная',
@@ -39,6 +37,7 @@ export const ru = {
     description: 'Описание',
     descriptionPlaceholder: 'Опционально',
     action: 'Действие',
+    add: 'Добавить диапозон',
     actionPlaceholder: 'Выберите действие',
     position: 'Позиция',
     selectRange: 'Выберите диапазон',
@@ -48,6 +47,7 @@ export const ru = {
     upgradeRequired: 'Улучшите подписку для создания большего числа диапазонов',
     nameRequired: 'Введите название',
     optional: 'Опционально',
+    update: 'Обновить диапозон',
   },
   gto: {
     title: 'GTO помощник',
@@ -89,7 +89,7 @@ export const ru = {
     },
     yourHand: 'Ваша рука',
     board: 'Борд',
-    position: 'Позиция:'
+    position: 'Позиция:',
   },
   profile: {
     title: 'Профиль',
@@ -111,6 +111,9 @@ export const ru = {
     activated: '✅ Активировано',
     status: 'Активен',
     successBanner: 'Подписка активирована! Перенаправляем...',
+    basicPrice: '799',
+    proPrice: '1499',
+    unlimitedPrice: '2499',
   },
   calculator: {
     title: 'Калькулятор эквити',
@@ -119,13 +122,15 @@ export const ru = {
     board: 'Карты на борде',
     result: 'Результат расчета',
     selectRange: 'Выберете диапозон',
-    action: 'Действие'
+    action: 'Действие',
+    opponent: 'Оппонент',
+    randomCards: 'Симуляция',
   },
   subscription: {
     title: 'Подписка',
     currentPlan: 'Текущий план',
-    startsAt: 'Дата начала {{date}}',
-    expiresAt: 'Дата окончания {{date}}',
+    startsAt: 'Дата начала',
+    expiresAt: 'Дата окончания',
     selectSubscription: 'Выбрать подписку',
   },
   errors: {
@@ -133,4 +138,4 @@ export const ru = {
     maxFiveCards: 'Максимум 5 карт на борде',
     required: 'Обязательное поле',
   },
-}
+};

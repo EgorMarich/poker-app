@@ -46,6 +46,7 @@ export const en = {
     upgradeRequired: 'Upgrade your plan to create more ranges',
     nameRequired: 'Enter a name',
     optional: 'Optional',
+    update: 'Update range',
   },
   gto: {
     title: 'GTO Helper',
@@ -109,6 +110,9 @@ export const en = {
     activated: '✅ Activated',
     status: 'Active',
     successBanner: 'Subscription activated! Redirecting...',
+    basicPrice: '12.99',
+    proPrice: '24.99',
+    unlimitedPrice: '39.99',
   },
   calculator: {
     title: 'Calculator equity',
@@ -117,13 +121,15 @@ export const en = {
     board: 'Board cards',
     result: 'Calculation result',
     selectRange: 'Select range',
-    action: 'Action'
+    action: 'Action',
+    opponent: 'Opponent',
+    randomCards: 'Simulation'
   },
   subscription: {
     title: 'Subscription',
     currentPlan: 'Current plan',
-    startsAt: 'Start date {{date}}',
-    expiresAt: 'Expiration date {{date}}',
+    startsAt: 'Start date',
+    expiresAt: 'Expiration date',
     selectSubscription: 'Select subscription',
   },
   errors: {

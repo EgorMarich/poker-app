@@ -7,6 +7,7 @@ import { useScenarios, useSubmitAttempt } from '$/entities/training/model/traini
 import { ResultCard } from './resultCard/ResultCard';
 import { ScenarioCard } from './scenarioCard/ScenarioCard';
 import { useTranslation } from 'react-i18next';
+import BackIcon from '../assets/back.svg?react';
 
 export const Training = () => {
   const { t } = useTranslation();
@@ -79,7 +80,7 @@ export const Training = () => {
     <div className={s.root}>
       <div className={s.header}>
         <button className={s.back} onClick={() => navigate('/profile')}>
-          ←
+          <BackIcon />
         </button>
         <div className={s.progress}>
           <div

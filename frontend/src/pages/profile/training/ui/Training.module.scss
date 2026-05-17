@@ -1,3 +1,5 @@
+@use '$/shared/styles/variables/colors';
+
 .root {
   display: flex;
   flex-direction: column;
@@ -31,7 +33,7 @@
 
 .progressBar {
   height: 100%;
-  background: var(--color-blue-500);
+  background: colors.$toxic-100;
   border-radius: 2px;
   transition: width 0.3s ease;
 }

@@ -46,6 +46,7 @@ export const es = {
     upgradeRequired: 'Mejora tu plan para crear más rangos',
     nameRequired: 'Ingrese un nombre',
     optional: 'Opcional',
+    update: 'Actualizar rango',
   },
 
   gto: {
@@ -110,6 +111,9 @@ export const es = {
     activated: '✅ Activado',
     status: 'Activo',
     successBanner: '¡Suscripción activada! Redirigiendo...',
+    basicPrice: '12.99',
+    proPrice: '24.99',
+    unlimitedPrice: '39.99',
   },
   calculator: {
     title: 'Calculadora el equity',
@@ -119,12 +123,14 @@ export const es = {
     result: 'Resultado del cálculo',
     selectRange: 'Seleccionar rango',
     action: 'Acción',
+    opponent: 'Oponente',
+    randomCards: 'Simulación',
   },
   subscription: {
     title: 'Suscripción',
     currentPlan: 'Plan actual',
-    startsAt: 'Fecha de inicio {{date}}',
-    expiresAt: 'Fecha de expiración {{date}}',
+    startsAt: 'Fecha de inicio',
+    expiresAt: 'Fecha de expiración',
     selectSubscription: 'Seleccionar suscripción',
   },
   errors: {

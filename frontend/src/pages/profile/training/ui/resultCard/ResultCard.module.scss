@@ -1,3 +1,5 @@
+@use '$/shared/styles/variables/colors';
+
 .root {
   display: flex;
   flex-direction: column;
@@ -12,10 +14,18 @@
   border-radius: 12px;
 }
 
-.correct { background: var(--color-green-900); border: 1px solid var(--color-green-700); }
-.wrong   { background: var(--color-red-900);   border: 1px solid var(--color-red-700); }
+.correct {
+  background: colors.$toxic-500;
+  border: 1px solid colors.$toxic-100;
+}
+.wrong {
+  background: var(--color-red-900);
+  border: 1px solid var(--color-red-700);
+}
 
-.emoji { font-size: 20px; }
+.emoji {
+  font-size: 20px;
+}
 
 .correctAnswer {
   display: flex;
@@ -35,4 +45,6 @@
   border-radius: 12px;
 }
 
-.explanationLabel { margin: 0; }
+.explanationLabel {
+  margin: 0;
+}

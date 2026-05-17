@@ -1,56 +1,53 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router'
-import { TARIFF_PLAN } from '../model/config'
-import { Card } from './card/Card'
-import { useCreatePayment, useSubscription } from '$/entities/payments/model/payments.queries'
-import { useQueryClient } from '@tanstack/react-query'
-import { queryKeys } from '$/shared/api/query-keys'
-import s from './Tariff.module.scss'
-import { useTranslation } from 'react-i18next'
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
+import { TARIFF_PLAN } from '../model/config';
+import { Card } from './card/Card';
+import { useCreatePayment, useSubscription } from '$/entities/payments/model/payments.queries';
+import { useQueryClient } from '@tanstack/react-query';
+import { queryKeys } from '$/shared/api/query-keys';
+import s from './Tariff.module.scss';
+import { useTranslation } from 'react-i18next';
+import BackIcon from '../assets/back.svg?react';
 
 export const Tariff = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { t } = useTranslation();
-  const qc = useQueryClient()
-  const { data: subscription } = useSubscription()
-  const { mutate: createPayment, isPending } = useCreatePayment()
-  const [loadingPlan, setLoadingPlan] = useState<string | null>(null)
-  const [successPlan, setSuccessPlan] = useState<string | null>(null)
+  const qc = useQueryClient();
+  const { data: subscription } = useSubscription();
+  const { mutate: createPayment, isPending } = useCreatePayment();
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+  const [successPlan, setSuccessPlan] = useState<string | null>(null);
 
   function handleSelect(plan: string) {
-    setLoadingPlan(plan)
+    setLoadingPlan(plan);
     //eslint-disable-next-line @typescript-eslint/no-explicit-any
     createPayment(plan as any, {
-      onSuccess: (res) => {
-        setLoadingPlan(null)
+      onSuccess: res => {
+        setLoadingPlan(null);
 
         if (res.testMode) {
-          
-          setSuccessPlan(plan)
-          qc.invalidateQueries({ queryKey: queryKeys.payments.subscription })
-          qc.invalidateQueries({ queryKey: queryKeys.profile })
-          setTimeout(() => navigate('/profile'), 2000)
-          return
+          setSuccessPlan(plan);
+          qc.invalidateQueries({ queryKey: queryKeys.payments.subscription });
+          qc.invalidateQueries({ queryKey: queryKeys.profile });
+          setTimeout(() => navigate('/profile'), 2000);
+          return;
         }
 
-        // Реальный режим — редирект на ЮКассу
         if (res.confirmationUrl) {
-          window.location.href = res.confirmationUrl
+          window.location.href = res.confirmationUrl;
         }
       },
       onError: () => setLoadingPlan(null),
-    })
+    });
   }
 
   return (
     <div className={s.root}>
-      <button className={s.back} onClick={() => navigate('/profile')}>←</button>
+      <button className={s.back} onClick={() => navigate('/profile')}>
+        <BackIcon />
+      </button>
 
-      {successPlan && (
-        <div className={s.successBanner}>
-          ✅ { t('subscription.successBanner') }
-        </div>
-      )}
+      {successPlan && <div className={s.successBanner}>✅ {t('subscription.successBanner')}</div>}
 
       {TARIFF_PLAN.map(item => (
         <Card
@@ -64,5 +61,5 @@ export const Tariff = () => {
         />
       ))}
     </div>
-  )
-}
+  );
+};

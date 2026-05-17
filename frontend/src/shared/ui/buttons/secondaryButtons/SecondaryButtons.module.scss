@@ -1,27 +1,29 @@
+@use '$/shared/styles/variables/colors';
+
 .button {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 5px;
   background-color: transparent;
-  color: white;
+  color: colors.$toxic-100;
   min-height: 40px;
-  border: 2px solid white;
+  border: 2px solid colors.$toxic-100;
 
   &:active {
     outline: none !important;
-    border: 2px solid white;
-    background-color: #e0e0e0;
+    border: 2px solid colors.$toxic-200;
+    background-color: colors.$toxic-200;
     color: black;
   }
 
   &:focus {
     outline: none !important;
-    border: 2px solid white;
+    border: 2px solid colors.$toxic-200;
   }
 
   &:hover {
     outline: none !important;
-    border: 2px solid white;
+    border: 2px solid colors.$toxic-200;
   }
 }
