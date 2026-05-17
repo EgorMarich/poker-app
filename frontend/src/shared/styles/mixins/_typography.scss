@@ -42,6 +42,7 @@
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-tight);
   letter-spacing: var(--letter-spacing-tight);
+  font-family: Tiny5, sans-serif !important;
 }
 
 @mixin headingSm {
@@ -49,6 +50,7 @@
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-normal);
   letter-spacing: var(--letter-spacing-normal);
+  font-family: Tiny5, sans-serif !important;
 }
 
 @mixin bodyMd {
@@ -56,6 +58,7 @@
   font-weight: var(--font-weight-normal);
   line-height: var(--line-height-tight);
   letter-spacing: var(--letter-spacing-tight);
+  // font-family: Tiny5, sans-serif !important;
 }
 
 @mixin bodySm {
@@ -77,6 +80,7 @@
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-normal);
   letter-spacing: var(--letter-spacing-normal);
+  font-family: Tiny5, sans-serif !important;
 }
 
 @mixin caption {
