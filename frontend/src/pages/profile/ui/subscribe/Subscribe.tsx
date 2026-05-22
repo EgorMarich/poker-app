@@ -11,28 +11,31 @@ interface SubscribeProps {
 }
 
 export const Subscribe = ({ start, end }: SubscribeProps) => {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const { t } = useTranslation();
   return (
     <div className={s.root}>
       <h4 className={clsx(s.title, typography({ variant: 'bodySmSemiBold', color: 'white' }))}>
-        { t('subscription.title') }
+        {t('subscription.title')}
       </h4>
 
       <div className={s.card}>
         <div className={s.start}>
-          <p>{ t('subscription.startAt') }: {start ?? '-'} </p>
+          <p>
+            {t('subscription.startsAt')}: {start ?? '-'}{' '}
+          </p>
         </div>
 
         <div className={s.end}>
-          <p>{ t('subscription.expiresAt') }: {end ?? '-'} </p>
+          <p>
+            {t('subscription.expiresAt')}: {end ?? '-'}{' '}
+          </p>
         </div>
       </div>
 
       <PrimaryButton onClick={() => navigate('/tariff')}>
-        { t('subscription.selectSubscription') }
+        {t('subscription.selectSubscription')}
       </PrimaryButton>
     </div>
   );
