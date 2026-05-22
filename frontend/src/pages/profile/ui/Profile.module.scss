@@ -5,3 +5,16 @@
   padding: 16px;
   margin-bottom: 80px;
 }
+
+.textbook {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background: #1a1a1a;
+  border-radius: 16px;
+
+  .text {
+    margin-bottom: 10px;
+  }
+}
