@@ -93,7 +93,10 @@ export const en = {
   profile: {
     title: 'Profile',
     noSubscription: 'No active subscription',
-    subscriptionActive: 'Active until {{date}}',
+    subscriptionActive: 'Active until:',
+    textbookDesc: 'Overview of GtoHelper and training topics. Tips to improve your game and useful materials to level up.',
+    textbook: 'Textbook',
+    toTextbook: 'Go to textbook',
     plans: {
       free: 'Free plan',
       basic: 'Basic',

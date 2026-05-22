@@ -94,7 +94,10 @@ export const ru = {
   profile: {
     title: 'Профиль',
     noSubscription: 'Нет активной подписки',
-    subscriptionActive: 'Активна до {{date}}',
+    subscriptionActive: 'Активна до: ',
+    textbookDesc: 'Разбор тем GtoHelper и тренажёра. Советы по игре и полезные материалы для повышения вашего уровня.',
+    textbook: 'Учебник',
+    toTextbook: 'Перейти в учебник',
     plans: {
       free: 'Бесплатный план',
       basic: 'Basic',

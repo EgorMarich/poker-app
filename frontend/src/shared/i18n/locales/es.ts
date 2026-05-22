@@ -94,7 +94,10 @@ export const es = {
   profile: {
     title: 'Perfil',
     noSubscription: 'Sin suscripción activa',
-    subscriptionActive: 'Activa hasta {{date}}',
+    subscriptionActive: 'Activa hasta:',
+    textbookDesc: 'Resumen de los temas tratados en GtoHelper y el entrenamiento. Consejos para mejorar tu juego y materiales útiles para elevar tu nivel.',
+    textbook: 'Ucedario',
+    toTextbook: 'Ir al libro de texto',
     plans: {
       free: 'Plan gratuito',
       basic: 'Basic',
