@@ -30,14 +30,14 @@ export const TrainingStats = ({ stats }: TrainingStatsProps) => {
       </h4>
 
       <div className={s.grid}>
-        <div className={s.card}>
+        {/* <div className={s.card}>
           <span className={clsx(s.value, typography({ variant: 'headingSm', color: 'white' }))}>
             {stats.total}
           </span>
           <span className={clsx(s.label, typography({ variant: 'caption', color: 'gray-500' }))}>
             {t('training.stats.total')}
           </span>
-        </div>
+        </div> */}
 
         <div className={s.card}>
           <span className={clsx(s.value, typography({ variant: 'headingSm', color: 'white' }))}>
@@ -48,14 +48,14 @@ export const TrainingStats = ({ stats }: TrainingStatsProps) => {
           </span>
         </div>
 
-        <div className={s.card}>
+        {/* <div className={s.card}>
           <span className={clsx(s.value, typography({ variant: 'headingSm', color: 'white' }))}>
             {stats.correct}
           </span>
           <span className={clsx(s.label, typography({ variant: 'caption', color: 'gray-500' }))}>
             {t('training.stats.correct')}
           </span>
-        </div>
+        </div> */}
 
         <div className={clsx(s.card, !stats.canAttempt && s.cardWarning)}>
           <span className={clsx(s.value, typography({ variant: 'headingSm', color: 'white' }))}>
