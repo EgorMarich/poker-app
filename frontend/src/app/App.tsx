@@ -11,6 +11,7 @@ import { Training } from '$/pages/profile/training/ui/Training';
 import { Tariff } from '$/pages/tariff';
 import { Admin } from '$/pages/admin/ui/Admin';
 import { ModalProvider } from '$/shared/modal/ModalProvider';
+import { Textbook } from '$/pages/profile/textbook/ui/Textbook';
 
 function App() {
   const [isReady, setIsReady] = useState(false);
@@ -35,6 +36,7 @@ function App() {
               <Route path="gto-helper" element={<GtoHelper />} />
               <Route path="profile" element={<Profile />} />
               <Route path="training" element={<Training />} />
+              <Route path="textbook" element={<Textbook />} />
               <Route path="tariff" element={<Tariff />} />
               <Route path="admin" element={<Admin />} />
             </Route>
