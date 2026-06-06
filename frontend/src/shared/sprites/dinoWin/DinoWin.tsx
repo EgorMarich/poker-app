@@ -1,16 +1,12 @@
-import s from './CrocodileWin.module.scss';
-import DinoWinImage from '../assets/DinoWin.png'
+import s from './DinoWin.module.scss';
+import DinoWinImage from '../assets/DinoWin.png';
 
 export const DinoWin = () => {
   return (
     <div className={s.wrapper}>
       <div className={s.glow} />
 
-      <img
-        src={DinoWinImage}
-        alt="dino win"
-        className={s.crocodile}
-      />
+      <img src={DinoWinImage} alt="dino win" className={s.crocodile} />
 
       <div className={s.sparkle1}>✦</div>
       <div className={s.sparkle2}>✦</div>

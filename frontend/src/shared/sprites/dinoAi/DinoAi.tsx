@@ -1,4 +1,4 @@
-import s from './CrocodileCoder.module.scss';
+import s from './DinoAi.module.scss';
 import DinoAiImage from '../assets/DinoAi.png';
 
 export const DinoAi = () => {
