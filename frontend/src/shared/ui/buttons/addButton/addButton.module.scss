@@ -11,6 +11,24 @@
   align-items: center;
   justify-content: center;
   left: 43%;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: colors.$toxic-200;
+    border: none;
+  }
+
+  &:active {
+    background-color: colors.$toxic-300;
+    border: none;
+    outline: none;
+  }
+
+  &:focus {
+    background-color: colors.$toxic-300;
+    border: none;
+    outline: none;
+  }
 }
 
 .icon {
