@@ -4,7 +4,7 @@ import s from './OpponentSlot.module.scss';
 import { typography } from '$/shared/typography/typography';
 import { useTranslation } from 'react-i18next';
 import RootSelect from '$/shared/ui/selects/rootSelect/RootSelect';
-
+import EditIcon from './assets/editor.svg?react';
 interface Range {
   id: string;
   name: string;
@@ -72,18 +72,14 @@ export const OpponentSlot = ({ index, ranges, selectedRangeId, onSelect }: Oppon
             value={selectedRangeId ?? ''}
             placeholder={t('calculator.selectRange')}
             onChange={val => onSelect(val || null)}
-            items={ranges.map(i => ({ label: i.name, value: i.id }))} 
+            items={ranges.map(i => ({ label: i.name, value: i.id }))}
           />
 
           {selectedRange && (
-            <button
-              type="button"
-              className={clsx(s.gridToggle, showGrid && s.gridToggleActive)}
+            <EditIcon
+              className={clsx(s.editorIcon, s.gridToggle, showGrid && s.gridToggleActive)}
               onClick={() => setShowGrid(v => !v)}
-              title={showGrid ? t('calculator.hideGrid') : t('calculator.showGrid')}
-            >
-              ⊞
-            </button>
+            />
           )}
 
           {selectedRangeId && (
@@ -101,7 +97,6 @@ export const OpponentSlot = ({ index, ranges, selectedRangeId, onSelect }: Oppon
         </div>
       </div>
 
-      {/* Превью сетки */}
       {showGrid && selectedRange && (
         <div className={s.gridWrapper}>
           <span
