@@ -1,0 +1,97 @@
+@use '$/shared/styles/variables/colors';
+
+.Accordion {
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  color: oklch(14.5% 0 0deg);
+
+  &:-moz-focus-inner {
+    border: none;
+    outline: none;
+  }
+}
+
+.Item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.Header {
+  margin: 0;
+  border: 2px solid colors.$toxic-100;
+
+  &:-moz-focus-inner {
+    border: none;
+    outline: none;
+  }
+}
+
+.Header {
+  border: 2px solid colors.$toxic-100 !important;
+}
+
+.Header:focus,
+.Header:focus-visible,
+.Header:focus-within {
+  border-color: colors.$toxic-100 !important;
+}
+
+.Trigger {
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0.75rem;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+  color: oklch(14.5% 0 0deg);
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  text-align: left;
+  -webkit-user-select: none;
+  user-select: none;
+
+  @media (prefers-color-scheme: dark) {
+    color: white;
+  }
+
+  &:focus-visible {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.Trigger:focus,
+.Trigger:focus-visible {
+  outline: 2px solid colors.$toxic-100;
+}
+
+.Icon {
+  transition: transform 100ms ease-out;
+
+  [data-panel-open] > & {
+    transform: rotate(45deg);
+  }
+}
+
+.Panel {
+  box-sizing: border-box;
+  overflow: hidden;
+  font-size: 0.875rem;
+
+  transition: height 150ms ease-out;
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    height: 0;
+  }
+}
