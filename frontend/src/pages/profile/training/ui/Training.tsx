@@ -7,7 +7,7 @@ import { useScenarios, useSubmitAttempt } from '$/entities/training/model/traini
 import { ResultCard } from './resultCard/ResultCard';
 import { ScenarioCard } from './scenarioCard/ScenarioCard';
 import { useTranslation } from 'react-i18next';
-import BackIcon from '../assets/back.svg?react';
+import { BackButton } from '$/shared/ui/buttons/backButton/BackButton';
 
 export const Training = () => {
   const { t } = useTranslation();
@@ -52,6 +52,10 @@ export const Training = () => {
     }
   }
 
+  function handleBack() {
+    navigate('/profile');
+  }
+
   if (isLoading) {
     return (
       <div className={s.center}>
@@ -79,9 +83,7 @@ export const Training = () => {
   return (
     <div className={s.root}>
       <div className={s.header}>
-        <button className={s.back} onClick={() => navigate('/profile')}>
-          <BackIcon />
-        </button>
+        <BackButton onClick={handleBack} />
         <div className={s.progress}>
           <div
             className={s.progressBar}

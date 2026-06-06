@@ -1,0 +1,19 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 390px;
+  min-width: 100%;
+  flex: 1;
+}
+
+.lessonWrapper {
+  display: flex;
+  min-width: 100%;
+  flex: 1;
+}
+
+.backButton {
+  display: flex;
+  justify-self: flex-start;
+}

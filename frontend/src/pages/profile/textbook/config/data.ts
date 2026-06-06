@@ -1,10 +1,14 @@
-export const DATA_LESSONS = [
+import { type TextbookVersion } from './types';
+
+
+
+export const DATA_LESSONS: TextbookVersion[] = [
   {
     version: '1.0',
     language: 'multi',
     lessons: [
       {
-        id: 'gto_intro',
+        id: 1,
         title: {
           ru: 'Введение в GTO покер',
           en: 'Introduction to GTO Poker',
@@ -65,7 +69,7 @@ export const DATA_LESSONS = [
         ],
       },
       {
-        id: 'cbet_gto',
+        id: 2,
         title: {
           ru: 'C-bet на флопе по GTO',
           en: 'GTO C-bet on the flop',
@@ -118,7 +122,7 @@ export const DATA_LESSONS = [
         ],
       },
       {
-        id: 'polarized_betting',
+        id: 3,
         title: {
           ru: 'Поляризованный диапазон ставки',
           en: 'Polarized betting range',
