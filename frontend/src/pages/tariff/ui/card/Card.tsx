@@ -1,29 +1,39 @@
-import { typography } from '$/shared/typography/typography'
-import { PrimaryButton } from '$/shared/ui/buttons/primaryButtons/PrimaryButtons'
-import { clsx } from 'clsx'
-import s from './Card.module.scss'
-import { useTranslation } from 'react-i18next'
+import { typography } from '$/shared/typography/typography';
+import { PrimaryButton } from '$/shared/ui/buttons/primaryButtons/PrimaryButtons';
+import { clsx } from 'clsx';
+import s from './Card.module.scss';
+import { useTranslation } from 'react-i18next';
+import DinoBasicImage from '/images/basic_tariff.webp';
+import DinoProImage from '/images/pro_tariff.webp';
+import DinoUnlimitedImage from '/images/unlimited_tariff.webp';
 
 interface CardProps {
-  id: number
-  plan: string
-  title: string
-  price: string
-  description: string
-  features: string[]
-  caption?: string
-  isActive?: boolean
-  isLoading?: boolean
-  isSuccess?: boolean
-  disabled?: boolean
-  onSelect: () => void
+  id: number;
+  plan: string;
+  title: string;
+  price: string;
+  description: string;
+  features: string[];
+  caption?: string;
+  isActive?: boolean;
+  isLoading?: boolean;
+  isSuccess?: boolean;
+  disabled?: boolean;
+  onSelect: () => void;
 }
 
 export const Card = ({
-  title, price, description, features, caption,
-  isActive, isLoading, isSuccess, disabled, onSelect,
+  title,
+  price,
+  description,
+  features,
+  caption,
+  isActive,
+  isLoading,
+  isSuccess,
+  disabled,
+  onSelect,
 }: CardProps) => {
-
   const { t } = useTranslation();
   function getButtonLabel() {
     if (isSuccess) return t('tariff.activated');
@@ -36,19 +46,15 @@ export const Card = ({
     <div className={clsx(s.root, isActive && s.rootActive)}>
       <div className={s.headingWrapper}>
         {caption && (
-          <span className={clsx(s.caption, typography({ variant: 'bodySm' }))}>
-            {caption}
-          </span>
+          <span className={clsx(s.caption, typography({ variant: 'bodySm' }))}>{caption}</span>
         )}
-        {isActive && (
-          <span className={s.activeBadge}>{ t('tariff.status') }</span>
-        )}
+        {isActive && <span className={s.activeBadge}>{t('tariff.status')}</span>}
         <h1 className={typography({ variant: 'headingMd' })}>{title}</h1>
       </div>
 
       <div className={s.price}>
-        <span className={typography({ variant: 'headingLg' })}>{price}</span> 
-        { t('tariff.perMonth') }
+        <span className={typography({ variant: 'headingLg' })}>{price}</span>
+        {t('tariff.perMonth')}
       </div>
 
       {description}
@@ -68,6 +74,12 @@ export const Card = ({
       >
         {getButtonLabel()}
       </PrimaryButton>
+
+      {title === 'Basic' && <img src={DinoBasicImage} className={s.basicImage} alt="Dino Basic" />}
+      {title === 'PRO' && <img src={DinoProImage} className={s.proImage} alt="Dino PRO" />}
+      {title === 'Unlimited' && (
+        <img src={DinoUnlimitedImage} className={s.unlimitedImage} alt="Dino Unlimited" />
+      )}
     </div>
-  )
-}
+  );
+};

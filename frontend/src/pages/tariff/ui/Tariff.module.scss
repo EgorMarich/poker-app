@@ -1,26 +1,6 @@
-.back {
-  background: none;
-  border: none;
+.backButton {
   display: flex;
   justify-self: start;
-  color: var(--color-gray-400);
-  font-size: var(--font-size-xl);
-  cursor: pointer;
-  padding: 4px;
-
-  &:hover {
-    border: none !important;
-  }
-
-  &:active {
-    border: none !important;
-    outline: none !important;
-  }
-
-  &:focus {
-    border: none !important;
-    outline: none !important;
-  }
 }
 
 .successBanner {

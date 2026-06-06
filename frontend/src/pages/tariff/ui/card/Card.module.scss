@@ -9,6 +9,7 @@
   padding: 20px;
   min-height: 370px;
   max-height: 370px;
+  // overflow: hidden;
 }
 
 .caption {
@@ -41,4 +42,28 @@
   height: 1px;
   margin-top: 20px;
   background-color: colors.$gray-600;
+}
+
+.basicImage {
+  position: absolute;
+  bottom: -5px;
+  right: -15px;
+  width: 150px;
+  height: auto;
+}
+
+.proImage {
+  position: absolute;
+  bottom: -2px;
+  right: -20px;
+  width: 190px;
+  height: 210px;
+}
+
+.unlimitedImage {
+  position: absolute;
+  bottom: -3px;
+  right: -20px;
+  width: 180px;
+  height: 210px;
 }
