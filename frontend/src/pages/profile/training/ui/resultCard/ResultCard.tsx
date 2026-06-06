@@ -5,6 +5,8 @@ import s from './ResultCard.module.scss';
 import { typography } from '$/shared/typography/typography';
 import { PrimaryButton } from '$/shared/ui/buttons/primaryButtons/PrimaryButtons';
 import { useTranslation } from 'react-i18next';
+import { DinoWin } from '$/shared/sprites/dinoWin/DinoWin';
+import { DinoLose } from '$/shared/sprites/dinoLose/DinoLose';
 
 interface Props {
   result: {
@@ -22,6 +24,8 @@ export const ResultCard = ({ result, scenario, onNext, isLast }: Props) => {
   const { t } = useTranslation();
   return (
     <div className={s.root}>
+      {result.isCorrect && <DinoWin />}
+      {!result.isCorrect && <DinoLose />}
       <div className={clsx(s.badge, result.isCorrect ? s.correct : s.wrong)}>
         <span className={s.emoji}>{result.isCorrect ? '✅' : '❌'}</span>
         <span className={clsx(typography({ variant: 'bodySmSemiBold', color: 'white' }))}>

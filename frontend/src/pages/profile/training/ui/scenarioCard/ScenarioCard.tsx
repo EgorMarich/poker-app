@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const ScenarioCard = ({ scenario, onAnswer, isPending }: Props) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   return (
     <div className={s.root}>
       {(scenario.playerCards?.length > 0 || scenario.boardCards?.length > 0) && (
@@ -22,7 +22,7 @@ export const ScenarioCard = ({ scenario, onAnswer, isPending }: Props) => {
               <span
                 className={clsx(s.cardLabel, typography({ variant: 'caption', color: 'gray-500' }))}
               >
-                { t('training.yourHand')}
+                {t('training.yourHand')}
               </span>
               <div className={s.cards}>
                 {scenario.playerCards.map((c: string) => (
@@ -36,7 +36,7 @@ export const ScenarioCard = ({ scenario, onAnswer, isPending }: Props) => {
               <span
                 className={clsx(s.cardLabel, typography({ variant: 'caption', color: 'gray-500' }))}
               >
-                { t('training.board')}
+                {t('training.board')}
               </span>
               <div className={s.cards}>
                 {scenario.boardCards.map((c: string) => (
@@ -51,7 +51,7 @@ export const ScenarioCard = ({ scenario, onAnswer, isPending }: Props) => {
       {scenario.position && (
         <div className={s.position}>
           <span className={clsx(typography({ variant: 'caption', color: 'gray-500' }))}>
-            { t('training.position')}
+            {t('training.position')}
           </span>
           <span
             className={clsx(s.positionBadge, typography({ variant: 'caption', color: 'white' }))}
@@ -74,9 +74,7 @@ export const ScenarioCard = ({ scenario, onAnswer, isPending }: Props) => {
             disabled={isPending}
           >
             <span className={s.optionId}>{option.id.toUpperCase()}</span>
-            <span className={clsx(typography({ variant: 'bodySm', color: 'white' }))}>
-              {option.label}
-            </span>
+            <span className={clsx(typography({ variant: 'bodySm' }))}>{option.label}</span>
           </button>
         ))}
       </div>

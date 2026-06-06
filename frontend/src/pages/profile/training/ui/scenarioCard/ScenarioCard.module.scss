@@ -1,7 +1,10 @@
+@use '$/shared/styles/variables/colors';
+
 .root {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  margin-bottom: 80px;
 }
 
 .cardsSection {
@@ -19,7 +22,9 @@
   gap: 8px;
 }
 
-.cardLabel { margin: 0; }
+.cardLabel {
+  margin: 0;
+}
 
 .cards {
   display: flex;
@@ -39,7 +44,9 @@
   font-size: var(--font-size-base);
 }
 
-.cardRed { color: var(--color-red-500); }
+.cardRed {
+  color: var(--color-red-500);
+}
 
 .position {
   display: flex;
@@ -49,7 +56,8 @@
 
 .positionBadge {
   padding: 2px 8px;
-  background: var(--color-blue-900);
+  background: colors.$toxic-100;
+  color: colors.$toxic-500;
   border-radius: 6px;
 }
 
@@ -74,14 +82,24 @@
   border-radius: 12px;
   cursor: pointer;
   text-align: left;
-  transition: border-color 0.15s, background 0.15s;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
 
   &:hover:not(:disabled) {
-    border-color: var(--color-blue-500);
-    background: var(--color-gray-700);
+    border-color: colors.$toxic-400;
+    background: colors.$toxic-100;
+    color: colors.$toxic-500;
+
+    .optionId {
+      background-color: colors.$toxic-500;
+    }
   }
 
-  &:disabled { opacity: 0.6; cursor: not-allowed; }
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 }
 
 .optionId {
