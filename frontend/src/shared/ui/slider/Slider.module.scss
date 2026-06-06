@@ -1,7 +1,7 @@
 @use '$/shared/styles/variables/colors';
 
 .wrapper {
-  width: 14rem;
+  width: 100%;
 }
 
 .label {
@@ -11,15 +11,18 @@
 
 .Control {
   display: flex;
+  min-width: 100%;
+  flex: 1;
   align-items: center;
-  width: 100%;
   padding-block: 0.75rem;
   touch-action: none;
 }
 
 .Track {
   position: relative;
-  width: 100%;
+  display: flex;
+  flex: 1;
+  min-width: 100%;
   height: 0.25rem;
   background-color: var(--color-gray-200);
   border-radius: 0.25rem;
@@ -39,7 +42,9 @@
 }
 
 .marks {
+  min-width: 100%;
   display: flex;
+  flex: 1;
   justify-content: space-between;
   font-size: 0.75rem;
   margin-top: 0.25rem;
