@@ -7,7 +7,6 @@ import { useQueryClient } from '@tanstack/react-query';
 import { queryKeys } from '$/shared/api/query-keys';
 import s from './Tariff.module.scss';
 import { useTranslation } from 'react-i18next';
-import BackIcon from '../assets/back.svg?react';
 import { BackButton } from '$/shared/ui/buttons/backButton/BackButton';
 
 export const Tariff = () => {
