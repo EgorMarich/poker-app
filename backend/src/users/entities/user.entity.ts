@@ -28,7 +28,6 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-
   @Column({ nullable: true, unique: true, type: 'bigint' })
   telegramId: number;
 
@@ -60,6 +59,9 @@ export class User {
 
   @Column({ type: 'enum', enum: UserRole, default: UserRole.USER })
   role: UserRole;
+
+  @Column({ nullable: true, unique: true })
+  promoCode: string;
 
   @Column({ default: true })
   isActive: boolean;

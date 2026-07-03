@@ -7,8 +7,8 @@ import { useQueryClient } from '@tanstack/react-query';
 import { queryKeys } from '$/shared/api/query-keys';
 import s from './Tariff.module.scss';
 import { useTranslation } from 'react-i18next';
-import BackIcon from '../assets/back.svg?react';
 import { BackButton } from '$/shared/ui/buttons/backButton/BackButton';
+import RootInput from '$/shared/ui/inputs/rootInput/RootInput';
 
 export const Tariff = () => {
   const navigate = useNavigate();
@@ -19,7 +19,13 @@ export const Tariff = () => {
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
   const [successPlan, setSuccessPlan] = useState<string | null>(null);
 
+  const [promoCode, setPromoCode] = useState('');
+  const [promoError, setPromoError] = useState('');
+
   function handleSelect(plan: string) {
+    setLoadingPlan(plan);
+
+    setPromoError('');
     setLoadingPlan(plan);
     //eslint-disable-next-line @typescript-eslint/no-explicit-any
     createPayment(plan as any, {
@@ -38,12 +44,18 @@ export const Tariff = () => {
           window.location.href = res.confirmationUrl;
         }
       },
-      onError: () => setLoadingPlan(null),
+      // eslint-disable-next-line
+      onError: (error: any) => {
+        setLoadingPlan(null);
+        if (error.response?.data?.message?.includes('промокод')) {
+          setPromoError(error.response.data.message);
+        }
+      },
     });
   }
 
-  function handleBack () {
-    navigate('/profile')
+  function handleBack() {
+    navigate('/profile');
   }
 
   return (
@@ -51,6 +63,15 @@ export const Tariff = () => {
       <BackButton onClick={handleBack} classnames={s.backButton} />
 
       {successPlan && <div className={s.successBanner}>✅ {t('subscription.successBanner')}</div>}
+      <div className={s.promoSection}>
+        <RootInput
+          label="Промокод (опционально)"
+          placeholder="IVAN1A2B"
+          value={promoCode}
+          onChange={setPromoCode}
+        />
+        {promoError && <span className={s.promoError}>{promoError}</span>}
+      </div>
 
       {TARIFF_PLAN.map(item => (
         <Card

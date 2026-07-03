@@ -25,7 +25,6 @@ import { TrainingModule } from './training/training.module';
 import { TrainingScenario } from './training/entities/training-scenario.entity';
 import { TrainingAttempt } from './training/entities/training-attempt.entity';
 
-
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -38,18 +37,22 @@ import { TrainingAttempt } from './training/entities/training-attempt.entity';
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
         type: 'postgres',
-        host: config.get<string>('DB_HOST', 'localhost'),
-        port: config.get<number>('DB_PORT', 5432),
-        username: config.get<string>('DB_USER'),
-        password: config.get<string>('DB_PASSWORD'),
-        database: config.get<string>('DB_NAME'),
-        entities: [User, Range, Session, QueryLog, Subscription, Payment, TrainingScenario,TrainingAttempt],
-        synchronize: config.get<string>('NODE_ENV') === 'development', 
-        logging: config.get<string>('NODE_ENV') === 'development',
-        ssl:
-          config.get<string>('NODE_ENV') === 'production'
-            ? { rejectUnauthorized: false }
-            : false,
+        url: config.get<string>('DB_URI'),
+        entities: [
+          User,
+          Range,
+          Session,
+          QueryLog,
+          Subscription,
+          Payment,
+          TrainingScenario,
+          TrainingAttempt,
+        ],
+        synchronize: false,
+        logging: false,
+        ssl: {
+          rejectUnauthorized: false,
+        },
       }),
     }),
 

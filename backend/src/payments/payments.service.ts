@@ -22,12 +22,13 @@ import {
   PaymentStatus,
 } from './entities/payments.entity';
 import { extractErrorDetails } from '@/common/utils/error.utils';
+import { ReferralService } from '@/refferal/refferal.service';
 
 const PLAN_PRICES = {
-  [SubscriptionPlan.BASIC]: { amount: '499.00', currency: 'RUB', months: 1 },
-  [SubscriptionPlan.PRO]: { amount: '999.00', currency: 'RUB', months: 1 },
+  [SubscriptionPlan.BASIC]: { amount: '899.00', currency: 'RUB', months: 1 },
+  [SubscriptionPlan.PRO]: { amount: '1499.00', currency: 'RUB', months: 1 },
   [SubscriptionPlan.UNLIMITED]: {
-    amount: '1999.00',
+    amount: '2499.00',
     currency: 'RUB',
     months: 1,
   },
@@ -50,9 +51,14 @@ export class PaymentsService {
     @InjectRepository(Subscription)
     private subscriptionRepository: Repository<Subscription>,
     private configService: ConfigService,
+    private referralService: ReferralService,
   ) {}
 
-  async createPayment(userId: string, plan: SubscriptionPlan) {
+  async createPayment(
+    userId: string,
+    plan: SubscriptionPlan,
+    promoCode?: string,
+  ) {
     if (plan === SubscriptionPlan.FREE) {
       throw new BadRequestException('Cannot pay for free plan');
     }
@@ -91,6 +97,10 @@ export class PaymentsService {
 
     const idempotenceKey = uuidv4();
     const returnUrl = this.configService.get<string>('YOOKASSA_RETURN_URL');
+
+    if (promoCode) {
+      await this.referralService.applyPromoCode(userId, promoCode);
+    }
 
     try {
       const response = await axios.post(
@@ -212,6 +222,7 @@ export class PaymentsService {
     subscription.lastPaymentId = payment.id;
 
     await this.subscriptionRepository.save(subscription);
+    await this.referralService.rewardReferrer(payment.userId);
     this.logger.log(
       `Subscription upgraded: user=${payment.userId} plan=${payment.plan}`,
     );
