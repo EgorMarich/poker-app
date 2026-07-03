@@ -1,43 +1,49 @@
+# ==========================
+# Stage 1: Build
+# ==========================
+FROM node:20-alpine AS builder
 
-FROM node:20.17.0-alpine AS builder
-
-RUN npm install -g pnpm && \
-    apk add --no-cache python3 make g++
+RUN corepack enable
 
 WORKDIR /app
 
-COPY package*.json pnpm-lock.yaml ./
+# Копируем файлы зависимостей
+COPY package.json pnpm-lock.yaml ./
 
+# Устанавливаем зависимости
 RUN pnpm install --frozen-lockfile
 
+# Копируем исходники
 COPY . .
 
+# Собираем приложение
 RUN pnpm run build
 
+# Удаляем dev-зависимости
 RUN pnpm prune --prod
 
-FROM node:20.17.0-alpine
 
+# ==========================
+# Stage 2: Production
+# ==========================
+FROM node:20-alpine
 
-RUN apk add --no-cache libc5-compat tini
-
-RUN addgroup -g 1001 -S nodejs && \
-    adduser -S nodejs -u 1001
+RUN apk add --no-cache tini
 
 WORKDIR /app
-
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package*.json ./
-
-RUN chown -R nodejs:nodejs /app
-
-USER nodejs
-
-EXPOSE 3000
 
 ENV NODE_ENV=production
 
-ENTRYPOINT ["/sbin/tini", "--"]
+# Копируем только необходимое
+COPY --from=builder /app/package.json ./
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/dist ./dist
 
-CMD ["node", "dist/main"]
+# Запускаем приложение не от root
+RUN chown -R node:node /app
+USER node
+
+EXPOSE 3000
+
+ENTRYPOINT ["/sbin/tini", "--"]
+CMD ["node", "dist/main.js"]
