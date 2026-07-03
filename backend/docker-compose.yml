@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   postgres:
     image: postgres:16-alpine
@@ -8,31 +6,35 @@ services:
     environment:
       POSTGRES_USER: ${DB_USER:-poker_user}
       POSTGRES_PASSWORD: ${DB_PASSWORD:-poker_pass}
-      POSTGRES_DB: ${DB_NAME:-poker_db}
+      POSTGRES_DB: ${DB_NAME:-poker_db}  # Это правильно
     ports:
-      - '5432:5432'
+      - '5433:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U ${DB_USER:-poker_user}']
+      test: ['CMD-SHELL', 'pg_isready -U ${DB_USER:-poker_user} -d ${DB_NAME:-poker_db}']
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - poker_network
 
   redis:
     image: redis:7-alpine
     container_name: poker_redis
     restart: unless-stopped
     ports:
-      - '6379:6379'
+      - '6380:6379'
     volumes:
       - redis_data:/data
     command: redis-server --appendonly yes
+    networks:
+      - poker_network
 
   app:
     build:
       context: .
-      dockerfile: Dockerfile.dev
+      dockerfile: dockerfile.dev
     container_name: poker_app
     restart: unless-stopped
     depends_on:
@@ -44,9 +46,9 @@ services:
       NODE_ENV: development
       DB_HOST: postgres
       DB_PORT: 5432
-      DB_USER: ${DB_USER:-poker_user}
-      DB_PASSWORD: ${DB_PASSWORD:-poker_pass}
-      DB_NAME: ${DB_NAME:-poker_db}
+      DB_USER: poker_user
+      DB_PASSWORD: poker_pass
+      DB_NAME: poker_db
       REDIS_HOST: redis
       REDIS_PORT: 6379
       JWT_SECRET: ${JWT_SECRET:-supersecretjwtkey}
@@ -57,6 +59,12 @@ services:
       - .:/app
       - /app/node_modules
     command: npm run start:dev
+    networks:
+      - poker_network
+
+networks:
+  poker_network:
+    driver: bridge
 
 volumes:
   postgres_data:

@@ -1,1 +1,3 @@
+//@ts-ignore
+
 const SUITS = [{}];

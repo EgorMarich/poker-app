@@ -26,8 +26,7 @@ export const GtoHelper = () => {
         isPending={isPending}
         // rangeItems={rangeItems}
       />
-
-      <GtoResponse aiResponse={aiResponse} isPending={isPending} />
+      <GtoResponse aiResponse={aiResponse ?? ''} isPending={isPending} />
     </div>
   );
 };

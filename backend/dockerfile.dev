@@ -1,31 +1,15 @@
 FROM node:20.17.0-alpine
 
-RUN apk add --no-cache libc5-compat
-    
-
 WORKDIR /app
 
-COPY package*.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
+# Копируем только package.json для установки зависимостей
+COPY package*.json ./
 
-FROM base as build
+# Устанавливаем зависимости через npm (не pnpm)
+RUN npm install
 
-COPY . .
-
-RUN pnpm run build
-
+# Остальной код не копируем - используем volume из compose
 EXPOSE 3000
 
-FROM build as production
-
-ENV NODE_ENV=production
-
-WORKDIR /app
-
-COPY --from=build /app/package*.json /app/pnpm-lock.yaml ./
-
-RUN pnpm install --frozen-lockfile --production
-
-COPY --from=build /app/dist ./dist
-
-CMD ["pnpm", "run", "node", "dist/main"]
+# Команда запуска из docker-compose.yml
+CMD ["npm", "run", "start:dev"]

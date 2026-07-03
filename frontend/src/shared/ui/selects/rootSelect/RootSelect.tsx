@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Select } from '@base-ui/react/select';
 import { Field } from '@base-ui/react/field';
 import styles from './RootSelect.module.scss';
