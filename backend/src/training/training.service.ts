@@ -28,16 +28,14 @@ export class TrainingService {
 
     if (difficulty) query.andWhere('s.difficulty = :difficulty', { difficulty })
 
-    // Бесплатным — только isFree сценарии
     if (!isPaid) query.andWhere('s.isFree = true')
 
     const scenarios = await query.getMany()
 
-    // Скрываем правильный ответ — отдаём только на фронт после попытки
     return scenarios.map(s => ({
       ...s,
-      options: s.options.map(o => ({ id: o.id, label: o.label })), // без isCorrect!
-      explanation: undefined, // скрываем до ответа
+      options: s.options.map(o => ({ id: o.id, label: o.label })), 
+      explanation: undefined, 
     }))
   }
 
@@ -47,7 +45,7 @@ export class TrainingService {
     selectedOptionId: string,
     timeSpentSec?: number,
   ) {
-    // Проверяем лимит для бесплатных
+
     const subscription = await this.subscriptionRepo.findOne({ where: { userId } })
     const isPaid = subscription?.plan !== SubscriptionPlan.FREE
 

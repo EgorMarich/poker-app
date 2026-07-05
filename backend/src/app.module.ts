@@ -48,7 +48,7 @@ import { TrainingAttempt } from './training/entities/training-attempt.entity';
           TrainingScenario,
           TrainingAttempt,
         ],
-        synchronize: false,
+        synchronize: true,
         logging: false,
       }),
     }),

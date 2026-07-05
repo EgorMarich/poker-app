@@ -12,6 +12,6 @@ export default new DataSource({
   database: process.env.DB_NAME || 'poker_db',
   entities: ['src/**/*.entity.ts'],
   migrations: ['src/database/migrations/*.ts'],
-  synchronize: false,
+  synchronize: true,
   logging: true,
 });
