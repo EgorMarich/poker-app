@@ -10,21 +10,63 @@ async function bootstrap() {
 
   app.setGlobalPrefix('api/v1');
 
+  const corsOrigins = process.env.CORS_ORIGINS
+    ? process.env.CORS_ORIGINS.split(',').map((origin) => origin.trim())
+    : ['http://localhost:5173', 'http://localhost:3000'];
+
+  const parsedOrigins = corsOrigins.map((origin) => {
+    if (origin.includes('*')) {
+      const pattern = origin.replace(/\./g, '\\.').replace(/\*/g, '.*');
+      return new RegExp(`^${pattern}$`);
+    }
+    return origin;
+  });
 
   app.enableCors({
-    origin: [
-      'http://localhost:5173',
-      'https://tkh1wct9-5173.euw.devtunnels.ms',
-      /\.devtunnels\.ms$/,
-    ],
+    origin: (origin, callback) => {
+      if (!origin) {
+        if (process.env.NODE_ENV === 'production') {
+          callback(new Error('Origin required in production'));
+        } else {
+          callback(null, true);
+        }
+        return;
+      }
+
+      const isAllowed = parsedOrigins.some((allowed) => {
+        if (typeof allowed === 'string') {
+          return origin === allowed;
+        }
+        if (allowed instanceof RegExp) {
+          return allowed.test(origin);
+        }
+        return false;
+      });
+
+      if (isAllowed) {
+        callback(null, true);
+      } else {
+        console.warn(`CORS blocked: ${origin}`);
+        callback(new Error(`CORS origin ${origin} not allowed`));
+      }
+    },
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: [
+      'Content-Type',
+      'Authorization',
+      'Accept',
+      'X-Requested-With',
+    ],
+    exposedHeaders: ['Authorization'],
+    maxAge: 864000,
   });
 
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true, 
+      whitelist: true,
       forbidNonWhitelisted: true,
-      transform: true, 
+      transform: true,
       transformOptions: {
         enableImplicitConversion: true,
       },
@@ -53,8 +95,8 @@ async function bootstrap() {
     },
   });
 
-  const dataSource = app.get(DataSource)
-  await seedTraining(dataSource)
+  const dataSource = app.get(DataSource);
+  await seedTraining(dataSource);
 
   const port = process.env.PORT || 3000;
   await app.listen(port);
