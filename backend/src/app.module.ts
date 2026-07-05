@@ -50,9 +50,6 @@ import { TrainingAttempt } from './training/entities/training-attempt.entity';
         ],
         synchronize: false,
         logging: false,
-        ssl: {
-          rejectUnauthorized: false,
-        },
       }),
     }),
 
