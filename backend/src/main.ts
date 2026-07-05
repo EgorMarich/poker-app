@@ -25,11 +25,7 @@ async function bootstrap() {
   app.enableCors({
     origin: (origin, callback) => {
       if (!origin) {
-        if (process.env.NODE_ENV === 'production') {
-          callback(new Error('Origin required in production'));
-        } else {
-          callback(null, true);
-        }
+        callback(null, true);
         return;
       }
 
