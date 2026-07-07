@@ -4,13 +4,13 @@ import { typography } from '$/shared/typography/typography';
 import { PrimaryButton } from '$/shared/ui/buttons/primaryButtons/PrimaryButtons';
 import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
+import { Subscription } from '$/shared/api/schemas';
 
 interface SubscribeProps {
-  start?: string;
-  end?: string;
+  subscription?: Subscription | null;
 }
 
-export const Subscribe = ({ start, end }: SubscribeProps) => {
+export const Subscribe = ({ subscription }: SubscribeProps) => {
   const navigate = useNavigate();
 
   const { t } = useTranslation();
@@ -23,13 +23,13 @@ export const Subscribe = ({ start, end }: SubscribeProps) => {
       <div className={s.card}>
         <div className={s.start}>
           <p>
-            {t('subscription.startsAt')}: {start ?? '-'}{' '}
+            {t('subscription.startsAt')}: {subscription?.startsAt ?? '-'}{' '}
           </p>
         </div>
 
         <div className={s.end}>
           <p>
-            {t('subscription.expiresAt')}: {end ?? '-'}{' '}
+            {t('subscription.expiresAt')}: {subscription?.expiresAt ?? '-'}{' '}
           </p>
         </div>
       </div>
