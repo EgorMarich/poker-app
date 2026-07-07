@@ -17,11 +17,21 @@ function App() {
   const [isReady, setIsReady] = useState(false);
   const { init, isPending } = useTelegramInit();
 
+  const isTelegram =
+  window.Telegram?.WebApp &&
+  typeof window.Telegram.WebApp.initData !== "undefined";
+
   if (!isReady && !isPending) {
     init().finally(() => setIsReady(true));
   }
 
   if (!isReady || isPending) return <div>Загрузка</div>;
+
+  if (!isTelegram) {
+    return (
+      <div>Данное приложение доступно только в Telegram</div>
+    )
+  }
 
   return (
     <BrowserRouter>
