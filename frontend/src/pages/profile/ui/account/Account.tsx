@@ -42,7 +42,7 @@ export const Account = ({ avatar, name, subscription }: AccountProps) => {
           <ProfileIcon className={s.icon} />
         )}
         <div className={s.info}>
-          <div className={typography({ variant: 'bodySmSemiBold' })}>{name}</div>
+          <div className={clsx(s.name, typography({ variant: 'bodySmSemiBold' }))}>{name}</div>
           <div className={clsx(s.plan, PLAN_COLORS[plan])}>{PLAN_LABELS[plan]}</div>
         </div>
       </div>
