@@ -1,0 +1,15 @@
+@use '$/shared/styles/variables/colors';
+
+.stub {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  background-color: colors.$gray-950;
+
+  h1 {
+    color: colors.$gray-50;
+    text-align: center;
+  }
+}
