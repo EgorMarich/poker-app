@@ -37,7 +37,7 @@ export const Profile = () => {
         </PrimaryButton>
       </div>
       <TrainingStats stats={stats} />
-      <Subscribe />
+      <Subscribe subscription={subscription} />
 
       {user?.role === 'admin' && (
         <PrimaryButton onClick={() => navigate('/admin')}>Перейти в админку</PrimaryButton>
