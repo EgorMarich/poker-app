@@ -20,7 +20,7 @@ export const TableSection: React.FC<TableSectionProps> = ({ section, language })
 
   return (
     <div className="table-section" style={{ marginBottom: '1.5rem' }}>
-      <h3 style={{ fontSize: '1.25rem', marginBottom: '0.75rem', color: '#2c3e50' }}>
+      <h3 style={{ fontSize: '1.25rem', marginBottom: '0.75rem', color: '#ebebeb' }}>
         {getLocalized(section.title)}
       </h3>
 
@@ -34,13 +34,13 @@ export const TableSection: React.FC<TableSectionProps> = ({ section, language })
           }}
         >
           <thead>
-            <tr style={{ background: '#34495e', color: '#fff' }}>
+            <tr style={{ background: '#0e0e0f', color: '#fff' }}>
               {headers.map((header, idx) => (
                 <th
                   key={idx}
                   style={{
                     padding: '0.75rem',
-                    border: '1px solid #3e5a6f',
+                    border: '1px solid #101010',
                     textAlign: 'left',
                     fontWeight: 600,
                   }}
@@ -55,7 +55,8 @@ export const TableSection: React.FC<TableSectionProps> = ({ section, language })
               <tr
                 key={rowIdx}
                 style={{
-                  background: rowIdx % 2 === 0 ? '#fff' : '#f9f9f9',
+                  color: '#555555',
+                  background: rowIdx % 2 === 0 ? '#141414' : '#121212',
                 }}
               >
                 {row.map((cell, cellIdx) => (
@@ -63,7 +64,7 @@ export const TableSection: React.FC<TableSectionProps> = ({ section, language })
                     key={cellIdx}
                     style={{
                       padding: '0.75rem',
-                      border: '1px solid #ddd',
+                      border: '1px solid #101010',
                     }}
                   >
                     {cell}

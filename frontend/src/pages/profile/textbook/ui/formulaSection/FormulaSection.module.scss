@@ -1,0 +1,29 @@
+@use '$/shared/styles/variables/colors';
+
+.formulaSection {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #1d1d1d;
+  border-radius: 8px;
+}
+
+.title {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+  color: colors.$white;
+}
+
+.text {
+  color: #555555;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.pre {
+  padding: 0.75rem;
+  border-radius: 4px;
+  overflow: auto;
+  color: #555555;
+  margin-bottom: 1rem;
+  background: #101010;
+}
