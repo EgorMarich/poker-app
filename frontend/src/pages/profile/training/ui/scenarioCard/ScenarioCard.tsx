@@ -73,7 +73,7 @@ export const ScenarioCard = ({ scenario, onAnswer, isPending }: Props) => {
             onClick={() => onAnswer(option.id)}
             disabled={isPending}
           >
-            <span className={s.optionId}>{option.id.toUpperCase()}</span>
+            <span className={s.optionId}>{option?.id?.toUpperCase()}</span>
             <span className={clsx(typography({ variant: 'bodySm' }))}>{option.label}</span>
           </button>
         ))}

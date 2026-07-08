@@ -126,7 +126,7 @@ export const Card = ({ name, description, position, matrix, actionType, id }: Ca
               {position}
             </p>
             <p className={clsx(s.action, typography({ variant: 'caption', color: 'gray-600' }))}>
-              {actionType.toUpperCase()}
+              {actionType?.toUpperCase()}
             </p>
           </div>
           <div className={s.infoActions}>
