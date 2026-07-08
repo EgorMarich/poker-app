@@ -1,43 +1,44 @@
-import { useForm, Controller } from 'react-hook-form'
-import s from './RangeEditorForm.module.scss'
-import RootInput from '$/shared/ui/inputs/rootInput/RootInput'
-import RootSelect from '$/shared/ui/selects/rootSelect/RootSelect'
-import { PositionSection } from './positionSection/PositionSection'
-import RangeSection from '../../../../features/rangeSection/RangeSection'
-import { useLayoutEffect, useState } from 'react'
-import { PrimaryButton } from '$/shared/ui/buttons/primaryButtons/PrimaryButtons'
-import { ColorSection } from '$/features/colorsSection/ColorSection'
-import { useCreateRange, useUpdateRange } from '$/entities/range/api/useMutation'
+import { useForm, Controller } from 'react-hook-form';
+import s from './RangeEditorForm.module.scss';
+import RootInput from '$/shared/ui/inputs/rootInput/RootInput';
+import RootSelect from '$/shared/ui/selects/rootSelect/RootSelect';
+import { PositionSection } from './positionSection/PositionSection';
+import RangeSection from '../../../../features/rangeSection/RangeSection';
+import { useLayoutEffect, useState } from 'react';
+import { PrimaryButton } from '$/shared/ui/buttons/primaryButtons/PrimaryButtons';
+import { ColorSection } from '$/features/colorsSection/ColorSection';
+import { useCreateRange, useUpdateRange } from '$/entities/range/api/useMutation';
 
-import { useRange } from '$/entities/range/api/useQueries'
-import { useTranslation } from 'react-i18next'
+import { useRange } from '$/entities/range/api/useQueries';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router';
 
-const POSITIONS = ['UTG', 'UTG+1', 'UTG+2', 'MP', 'HJ', 'CO', 'BTN', 'SB', 'BB'] as const
+const POSITIONS = ['UTG', 'UTG+1', 'UTG+2', 'MP', 'HJ', 'CO', 'BTN', 'SB', 'BB'] as const;
 // type Position = typeof POSITIONS[number]
 
 interface FormData {
-  name: string
-  description: string
-  action: 'open' | 'raise' | '3bet' | 'fold' | 'call' | undefined
-  position: number | undefined
-  color: string
+  name: string;
+  description: string;
+  action: 'open' | 'raise' | '3bet' | 'fold' | 'call' | undefined;
+  position: number | undefined;
+  color: string;
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
-  range: Record<string, any>
+  range: Record<string, any>;
 }
 
 interface RangeEditorFormProps {
-  id?: string
+  id?: string;
 }
 
 export const RangeEditorForm = ({ id }: RangeEditorFormProps) => {
-
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
-  const isEditMode = !!id
-  const { data: rangeData } = useRange(isEditMode ? id : '')
+  const isEditMode = !!id;
+  const { data: rangeData } = useRange(isEditMode ? id : '');
 
-  const [isActiveColor, setIsActiveColor] = useState<string | null>(null)
-  const [isActivePosition, setIsActivePosition] = useState<number | null>(null)
+  const [isActiveColor, setIsActiveColor] = useState<string | null>(null);
+  const [isActivePosition, setIsActivePosition] = useState<number | null>(null);
 
   const { control, reset, handleSubmit } = useForm<FormData>({
     defaultValues: {
@@ -48,15 +49,15 @@ export const RangeEditorForm = ({ id }: RangeEditorFormProps) => {
       color: '',
       range: {},
     },
-  })
+  });
 
-  const { mutate: createRange } = useCreateRange()
-  const { mutate: updateRange } = useUpdateRange()
+  const { mutate: createRange } = useCreateRange();
+  const { mutate: updateRange } = useUpdateRange();
 
   useLayoutEffect(() => {
-    if (!isEditMode || !rangeData) return
+    if (!isEditMode || !rangeData) return;
 
-    const positionIndex = POSITIONS.findIndex(p => p === rangeData.position)
+    const positionIndex = POSITIONS.findIndex(p => p === rangeData.position);
 
     reset({
       name: rangeData.name ?? '',
@@ -65,13 +66,13 @@ export const RangeEditorForm = ({ id }: RangeEditorFormProps) => {
       position: positionIndex !== -1 ? positionIndex + 1 : undefined,
       color: '',
       range: rangeData.matrix ?? {},
-    })
+    });
 
     if (positionIndex !== -1) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      setIsActivePosition(positionIndex + 1)
+      setIsActivePosition(positionIndex + 1);
     }
-  }, [isEditMode, rangeData, reset])
+  }, [isEditMode, rangeData, reset]);
 
   const onSubmit = (data: FormData) => {
     const payload = {
@@ -80,14 +81,16 @@ export const RangeEditorForm = ({ id }: RangeEditorFormProps) => {
       actionType: data.action,
       position: data.position != null ? POSITIONS[data.position - 1] : undefined,
       matrix: data.range,
-    }
+    };
 
     if (isEditMode && id) {
-      updateRange({ id, body: payload })
+      updateRange({ id, body: payload });
     } else {
-      createRange(payload)
+      createRange(payload);
     }
-  }
+
+    navigate('/');
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
@@ -97,7 +100,11 @@ export const RangeEditorForm = ({ id }: RangeEditorFormProps) => {
         rules={{ required: t('ranges.nameRequired') }}
         render={({ field, fieldState }) => (
           <>
-            <RootInput placeholder={ t('ranges.namePlaceholder') } label={t('ranges.name')} {...field} />
+            <RootInput
+              placeholder={t('ranges.namePlaceholder')}
+              label={t('ranges.name')}
+              {...field}
+            />
             {fieldState.error && <span>{fieldState.error.message}</span>}
           </>
         )}
@@ -108,7 +115,11 @@ export const RangeEditorForm = ({ id }: RangeEditorFormProps) => {
         control={control}
         render={({ field, fieldState }) => (
           <>
-            <RootInput placeholder={t('ranges.optional')} label={t('ranges.description')} {...field} />
+            <RootInput
+              placeholder={t('ranges.optional')}
+              label={t('ranges.description')}
+              {...field}
+            />
             {fieldState.error && <span>{fieldState.error.message}</span>}
           </>
         )}
@@ -138,8 +149,8 @@ export const RangeEditorForm = ({ id }: RangeEditorFormProps) => {
             <PositionSection
               isActive={isActivePosition}
               onChange={posId => {
-                setIsActivePosition(posId)
-                field.onChange(posId)
+                setIsActivePosition(posId);
+                field.onChange(posId);
               }}
             />
             {fieldState.error && <span>{fieldState.error.message}</span>}
@@ -155,8 +166,8 @@ export const RangeEditorForm = ({ id }: RangeEditorFormProps) => {
             <ColorSection
               isActive={isActiveColor}
               onChange={hex => {
-                setIsActiveColor(hex)
-                field.onChange(hex)
+                setIsActiveColor(hex);
+                field.onChange(hex);
               }}
             />
             {fieldState.error && <span>{fieldState.error.message}</span>}
@@ -183,8 +194,8 @@ export const RangeEditorForm = ({ id }: RangeEditorFormProps) => {
         {isEditMode ? t('ranges.update') : t('ranges.add')}
       </PrimaryButton>
     </form>
-  )
-}
+  );
+};
 
 const actions = [
   { label: 'open', value: 'open' },
@@ -193,4 +204,4 @@ const actions = [
   { label: 'Limp', value: 'Limp' },
   { label: 'fold', value: 'fold' },
   { label: 'call', value: 'call' },
-]
+];
