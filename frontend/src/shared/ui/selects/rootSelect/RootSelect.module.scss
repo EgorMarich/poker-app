@@ -5,7 +5,6 @@
   flex-direction: column;
   align-items: start;
   gap: 0.25rem;
-  border: 2px solid colors.$toxic-100;
   width: 100%; // Добавляем, чтобы поле занимало всю ширину
 
   :active {
@@ -36,8 +35,8 @@
   padding-left: 0.875rem;
   padding-right: 0.75rem;
   margin: 0;
-  outline: 0;
-  border: 2px solid colors.$toxic-100;
+  outline: none !important; 
+  border: 2px solid colors.$toxic-100 !important;
   border-radius: 12px;
   background-color: #0f0f0f;
   font-family: inherit;
@@ -49,19 +48,54 @@
   font-weight: 400;
   min-width: 100%;
   max-width: 100%;
+  cursor: pointer;
+
+  &:hover {
+    border: 2px solid colors.$toxic-100 !important;
+  }
+
+  &:focus {
+    outline: none !important;
+    border: 2px solid colors.$toxic-100 !important;
+  }
 
   &:focus-visible {
     outline: none !important;
-    border: none !important;
+    border: 2px solid colors.$toxic-100 !important;
   }
 
-  &:active-visible {
+  &:active {
     outline: none !important;
-    border: none !important;
+    border: 2px solid colors.$toxic-100 !important;
   }
 
-  &:hover {
-    border: 2px solid colors.$toxic-100;
+  &[data-state='open'] {
+    border: 2px solid colors.$toxic-100 !important;
+    outline: none !important;
+  }
+
+  &[data-state='closed'] {
+    border: 2px solid colors.$toxic-100 !important;
+    outline: none !important;
+  }
+
+  &[data-focus-visible] {
+    outline: none !important;
+    border: 2px solid colors.$toxic-100 !important;
+  }
+
+  &[data-value] {
+    border: 2px solid colors.$toxic-100 !important;
+  }
+
+  &[data-placeholder] {
+    border: 2px solid colors.$toxic-100 !important;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border: 2px solid colors.$toxic-100 !important;
   }
 }
 
