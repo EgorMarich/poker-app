@@ -12,25 +12,25 @@ import { Tariff } from '$/pages/tariff';
 import { Admin } from '$/pages/admin/ui/Admin';
 import { ModalProvider } from '$/shared/modal/ModalProvider';
 import { Textbook } from '$/pages/profile/textbook/ui/Textbook';
+import { Stub } from '$/pages/stub/Stub';
 
 function App() {
   const [isReady, setIsReady] = useState(false);
   const { init, isPending } = useTelegramInit();
 
-  const isTelegram =
-  window.Telegram?.WebApp &&
-  typeof window.Telegram.WebApp.initData !== "undefined";
+  const webApp = window.Telegram?.WebApp;
+  const isTelegram = !!webApp?.initData;
+
+  if (!isTelegram) {
+    return <Stub />;
+  }
 
   if (!isReady && !isPending) {
     init().finally(() => setIsReady(true));
   }
 
-  if (!isReady || isPending) return <div>Загрузка</div>;
-
-  if (!isTelegram) {
-    return (
-      <div>Данное приложение доступно только в Telegram</div>
-    )
+  if (!isReady || isPending) {
+    return <div>Загрузка...</div>;
   }
 
   return (

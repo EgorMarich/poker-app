@@ -1,15 +1,27 @@
 @use '$/shared/styles/variables/colors';
 
 .stub {
+  height: 100%;
+  padding-top: 100px;
+  margin-top: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 16px;
-  background-color: colors.$gray-950;
+  background-color: #0b0b0b;
+  font-family: PixelifySans;
 
-  h1 {
+  .title {
+    max-width: 1200px;
+    font-size: 72px;
     color: colors.$gray-50;
     text-align: center;
+    color: colors.$toxic-100;
+  }
+
+  .image {
+    width: 450px;
+    height: auto;
   }
 }
